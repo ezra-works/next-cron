@@ -1,0 +1,241 @@
+{
+  "definitions": {},
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "http://example.com/root.json",
+  "type": "object",
+  "title": "The Root Schema",
+  "required": [
+    "cron"
+  ],
+  "properties": {
+    "cron": {
+      "$id": "#/properties/cron",
+      "type": "object",
+      "title": "The Cron Schema",
+      "required": [
+        "id",
+        "name",
+        "status",
+        "weekdays",
+        "months",
+        "minutes",
+        "hours",
+        "script",
+        "parameter",
+        "startDate",
+        "endDate",
+        "startTime",
+        "endTime",
+        "timeZone"
+      ],
+      "properties": {
+        "id": {
+          "$id": "#/properties/cron/properties/id",
+          "type": "integer",
+          "title": "The Id Schema",
+          "default": 0,
+          "examples": [
+            0
+          ]
+        },
+        "name": {
+          "$id": "#/properties/cron/properties/name",
+          "type": "string",
+          "title": "The Name Schema",
+          "default": "",
+          "examples": [
+            "cron001"
+          ],
+          "pattern": "^(.*)$"
+        },
+        "status": {
+          "$id": "#/properties/cron/properties/status",
+          "type": "string",
+          "title": "The Status Schema",
+          "default": "",
+          "examples": [
+            "Disabled"
+          ],
+          "pattern": "^(.*)$"
+        },
+        "weekdays": {
+          "$id": "#/properties/cron/properties/weekdays",
+          "type": "object",
+          "title": "The Weekdays Schema",
+          "required": [
+            "on"
+          ],
+          "properties": {
+            "on": {
+              "$id": "#/properties/cron/properties/weekdays/properties/on",
+              "type": "array",
+              "title": "The On Schema",
+              "items": {
+                "$id": "#/properties/cron/properties/weekdays/properties/on/items",
+                "type": "string",
+                "title": "The Items Schema",
+                "default": "",
+                "examples": [
+                  "saturday"
+                ],
+                "pattern": "^(.*)$"
+              }
+            }
+          }
+        },
+        "months": {
+          "$id": "#/properties/cron/properties/months",
+          "type": "object",
+          "title": "The Months Schema",
+          "required": [
+            "on"
+          ],
+          "properties": {
+            "on": {
+              "$id": "#/properties/cron/properties/months/properties/on",
+              "type": "array",
+              "title": "The On Schema",
+              "items": {
+                "$id": "#/properties/cron/properties/months/properties/on/items",
+                "type": "string",
+                "title": "The Items Schema",
+                "default": "",
+                "examples": [
+                  "march",
+                  "july",
+                  "august"
+                ],
+                "pattern": "^(.*)$"
+              }
+            }
+          }
+        },
+        "minutes": {
+          "$id": "#/properties/cron/properties/minutes",
+          "type": "object",
+          "title": "The Minutes Schema",
+          "required": [
+            "on"
+          ],
+          "properties": {
+            "on": {
+              "$id": "#/properties/cron/properties/minutes/properties/on",
+              "type": "array",
+              "title": "The On Schema",
+              "items": {
+                "$id": "#/properties/cron/properties/minutes/properties/on/items",
+                "type": "integer",
+                "title": "The Items Schema",
+                "default": 0,
+                "examples": [
+                  0
+                ]
+              }
+            }
+          }
+        },
+        "hours": {
+          "$id": "#/properties/cron/properties/hours",
+          "type": "object",
+          "title": "The Hours Schema",
+          "required": [
+            "on"
+          ],
+          "properties": {
+            "on": {
+              "$id": "#/properties/cron/properties/hours/properties/on",
+              "type": "array",
+              "title": "The On Schema",
+              "items": {
+                "$id": "#/properties/cron/properties/hours/properties/on/items",
+                "type": "integer",
+                "title": "The Items Schema",
+                "default": 0,
+                "examples": [
+                  1
+                ]
+              }
+            }
+          }
+        },
+        "script": {
+          "$id": "#/properties/cron/properties/script",
+          "type": "string",
+          "title": "The Script Schema",
+          "default": "",
+          "examples": [
+            "/Users/ezmoses/Downloads/HelloWorld.sh"
+          ],
+          "pattern": "^(.*)$"
+        },
+        "parameter": {
+          "$id": "#/properties/cron/properties/parameter",
+          "type": "array",
+          "title": "The Parameter Schema",
+          "items": {
+            "$id": "#/properties/cron/properties/parameter/items",
+            "type": "string",
+            "title": "The Items Schema",
+            "default": "",
+            "examples": [
+              "StringValue",
+              100,
+              100.2
+            ],
+            "pattern": "^(.*)$"
+          }
+        },
+        "startDate": {
+          "$id": "#/properties/cron/properties/startDate",
+          "type": "string",
+          "title": "The Startdate Schema",
+          "default": "",
+          "examples": [
+            ""
+          ],
+          "pattern": "^(.*)$"
+        },
+        "endDate": {
+          "$id": "#/properties/cron/properties/endDate",
+          "type": "string",
+          "title": "The Enddate Schema",
+          "default": "",
+          "examples": [
+            ""
+          ],
+          "pattern": "^(.*)$"
+        },
+        "startTime": {
+          "$id": "#/properties/cron/properties/startTime",
+          "type": "string",
+          "title": "The Starttime Schema",
+          "default": "",
+          "examples": [
+            ""
+          ],
+          "pattern": "^(.*)$"
+        },
+        "endTime": {
+          "$id": "#/properties/cron/properties/endTime",
+          "type": "string",
+          "title": "The Endtime Schema",
+          "default": "",
+          "examples": [
+            ""
+          ],
+          "pattern": "^(.*)$"
+        },
+        "timeZone": {
+          "$id": "#/properties/cron/properties/timeZone",
+          "type": "string",
+          "title": "The Timezone Schema",
+          "default": "",
+          "examples": [
+            "Australia/Sydney (UTC+11:00)"
+          ],
+          "pattern": "^(.*)$"
+        }
+      }
+    }
+  }
+}

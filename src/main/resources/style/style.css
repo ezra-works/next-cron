@@ -1,0 +1,46 @@
+.root {
+
+}
+
+.root * {
+   /* -fx-font: 14px Arial;*/
+}
+
+.add-button-raised{
+    -fx-padding: 0.7em 0.57em;
+    -fx-font-size: 14px;
+    -jfx-button-type: RAISED;
+    -fx-background-color: #6200EE;
+    -fx-pref-width: 50;
+    -fx-text-fill: WHITE;
+    -fx-background-radius: 50%;
+}
+
+.primary-background {
+    -fx-background-color: #6200EE;
+    -fx-text-fill: WHITE;
+}
+
+.save-button-raised{
+    -jfx-button-type: RAISED;
+    -fx-background-image: url("/images/icons8-save-50.png");
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 35 35;
+    -fx-background-position: center center;
+    -fx-text-fill: WHITE;
+    -fx-pref-width: 60;
+    -fx-pref-height: 55;
+    -fx-background-radius: 50%;
+}
+
+.delete-button-raised{
+    -jfx-button-type: RAISED;
+    -fx-background-image: url("/images/icons8-trash-50-3.png");
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 35 35;
+    -fx-background-position: center center;
+    -fx-text-fill: WHITE;
+    -fx-pref-width: 60;
+    -fx-pref-height: 55;
+    -fx-background-radius: 50%;
+}

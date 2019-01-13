@@ -1,0 +1,1089 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXCheckBox?>
+<?import com.jfoenix.controls.JFXDatePicker?>
+<?import com.jfoenix.controls.JFXListView?>
+<?import com.jfoenix.controls.JFXTimePicker?>
+<?import com.jfoenix.controls.JFXToggleButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Group?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.effect.GaussianBlur?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<SplitPane fx:id="rootPane" dividerPositions="0.25" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" scaleShape="false" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.byteland.Controller">
+  <items>
+    <AnchorPane maxHeight="600.0" maxWidth="200.0" minHeight="600.0" minWidth="200.0" prefHeight="600.0" prefWidth="200.0" SplitPane.resizableWithParent="false">
+         <children>
+            <JFXButton fx:id="addCronButton" buttonType="RAISED" layoutX="130.0" layoutY="23.0" onAction="#addCronButtonAction" prefHeight="46.0" prefWidth="62.0" styleClass="add-button-raised" stylesheets="@style/style.css" text="+" />
+            <JFXListView fx:id="cronListView" editable="true" fixedCellSize="0.0" layoutX="6.0" layoutY="100.0" maxHeight="500.0" maxWidth="200.0" minHeight="500.0" minWidth="200.0" prefHeight="500.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="100.0" />
+         </children></AnchorPane>
+    <AnchorPane maxHeight="600.0" maxWidth="600.0" minHeight="600.0" minWidth="600.0" prefHeight="600.0" prefWidth="600.0" SplitPane.resizableWithParent="false">
+         <children>
+            <SplitPane dividerPositions="0.21717171717171718" layoutX="106.0" layoutY="99.0" orientation="VERTICAL" pickOnBounds="false" prefHeight="398.0" prefWidth="410.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+              <items>
+                <AnchorPane maxHeight="100.0" maxWidth="600.0" minHeight="100.0" minWidth="600.0" prefHeight="100.0" prefWidth="600.0" SplitPane.resizableWithParent="false">
+                     <children>
+                        <GridPane layoutX="123.0" layoutY="18.0" prefHeight="125.0" prefWidth="592.0" styleClass="primary-background" stylesheets="@style/style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="99.0" minWidth="10.0" prefWidth="82.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="158.0" minWidth="10.0" prefWidth="132.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="174.0" minWidth="10.0" prefWidth="139.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="147.0" minWidth="10.0" prefWidth="121.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="123.0" minWidth="10.0" prefWidth="123.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <JFXToggleButton fx:id="cronStatusButton" onAction="#cronStatusButtonAction" styleClass="primary-background" text="Stopped" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
+                              <JFXButton fx:id="cronSaveButton" buttonType="RAISED" onAction="#cronSaveAction" prefHeight="60.0" prefWidth="60.0" ripplerFill="#a8cc46" styleClass="save-button-raised" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                                 <effect>
+                                    <GaussianBlur />
+                                 </effect>
+                              </JFXButton>
+                              <JFXButton fx:id="cronDeleteButton" buttonType="RAISED" onAction="#cronDeleteAction" prefHeight="70.0" prefWidth="70.0" ripplerFill="#a8cc46" styleClass="delete-button-raised" GridPane.columnIndex="4" GridPane.halignment="CENTER">
+                                 <effect>
+                                    <GaussianBlur />
+                                 </effect>
+                              </JFXButton>
+                              <Label styleClass="primary-background" text="Status" GridPane.halignment="CENTER" />
+                              <JFXToggleButton fx:id="stopAllButton" onAction="#stopAllButtonAction" prefHeight="57.0" prefWidth="139.0" styleClass="primary-background" text="Stop All" GridPane.columnIndex="2" />
+                           </children>
+                        </GridPane>
+                     </children>
+                  </AnchorPane>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" SplitPane.resizableWithParent="false">
+                     <children>
+                        <TabPane layoutX="37.0" layoutY="14.0" prefHeight="463.0" prefWidth="592.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                          <tabs>
+                            <Tab text="Weekday &amp; Months">
+                              <content>
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                       <children>
+                                          <GridPane fx:id="weekMonthGrid" layoutX="33.0" layoutY="45.0" prefHeight="329.0" prefWidth="513.0">
+                                            <columnConstraints>
+                                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="276.0" minWidth="10.0" prefWidth="189.0" />
+                                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="281.0" minWidth="0.0" prefWidth="166.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="281.0" minWidth="10.0" prefWidth="157.0" />
+                                            </columnConstraints>
+                                            <rowConstraints>
+                                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                            </rowConstraints>
+                                             <children>
+                                                <JFXCheckBox fx:id="allWeekdayCheckBox" onAction="#allWeekdayCheckBoxAction" text="Select All Weekdays">
+                                                   <GridPane.margin>
+                                                      <Insets left="5.0" />
+                                                   </GridPane.margin>
+                                                   <font>
+                                                      <Font name="System Bold Italic" size="15.0" />
+                                                   </font>
+                                                </JFXCheckBox>
+                                                <JFXCheckBox fx:id="saturdayCheckBox" accessibleText="week" text="Saturday" textFill="#68702b" GridPane.rowIndex="1">
+                                                   <GridPane.margin>
+                                                      <Insets left="30.0" />
+                                                   </GridPane.margin>
+                                                   <font>
+                                                      <Font name="System Bold Italic" size="15.0" />
+                                                   </font>
+                                                </JFXCheckBox>
+                                                <JFXCheckBox fx:id="mondayCheckBox" accessibleText="week" text="Monday" textFill="#c7a116" GridPane.rowIndex="3">
+                                                   <GridPane.margin>
+                                                      <Insets left="30.0" />
+                                                   </GridPane.margin>
+                                                   <font>
+                                                      <Font name="System Bold" size="15.0" />
+                                                   </font>
+                                                </JFXCheckBox>
+                                                <JFXCheckBox fx:id="tuesdayCheckBox" accessibleText="week" text="Tuesday" textFill="#c7a116" GridPane.rowIndex="4">
+                                                   <GridPane.margin>
+                                                      <Insets left="30.0" />
+                                                   </GridPane.margin>
+                                                   <font>
+                                                      <Font name="System Bold" size="15.0" />
+                                                   </font>
+                                                </JFXCheckBox>
+                                                <JFXCheckBox fx:id="wednesdayCheckBox" accessibleText="week" text="Wednesday" textFill="#c7a116" GridPane.rowIndex="5">
+                                                   <GridPane.margin>
+                                                      <Insets left="30.0" />
+                                                   </GridPane.margin>
+                                                   <font>
+                                                      <Font name="System Bold" size="15.0" />
+                                                   </font>
+                                                </JFXCheckBox>
+                                                <JFXCheckBox fx:id="thursdayCheckBox" accessibleText="week" text="Thursday" textFill="#c7a116" GridPane.rowIndex="6">
+                                                   <GridPane.margin>
+                                                      <Insets left="30.0" />
+                                                   </GridPane.margin>
+                                                   <font>
+                                                      <Font name="System Bold" size="15.0" />
+                                                   </font>
+                                                </JFXCheckBox>
+                                                <JFXCheckBox fx:id="fridayCheckBox" accessibleText="week" text="Friday" textFill="#c7a116" GridPane.rowIndex="7">
+                                                   <GridPane.margin>
+                                                      <Insets left="30.0" />
+                                                   </GridPane.margin>
+                                                   <font>
+                                                      <Font name="System Bold" size="15.0" />
+                                                   </font>
+                                                </JFXCheckBox>
+                                                <JFXCheckBox fx:id="sundayCheckBox" accessibleText="week" text="Sunday" textFill="#68702b" GridPane.rowIndex="2">
+                                                   <GridPane.margin>
+                                                      <Insets left="30.0" />
+                                                   </GridPane.margin>
+                                                   <font>
+                                                      <Font name="System Bold Italic" size="15.0" />
+                                                   </font>
+                                                </JFXCheckBox>
+                                                <JFXCheckBox fx:id="allMonthsCheckBox" onAction="#allMonthsCheckBoxAction" text="Select All Months" GridPane.columnIndex="1">
+                                                   <font>
+                                                      <Font name="System Bold Italic" size="15.0" />
+                                                   </font>
+                                                   <GridPane.margin>
+                                                      <Insets left="90.0" />
+                                                   </GridPane.margin>
+                                                </JFXCheckBox>
+                                                <JFXCheckBox fx:id="januaryCheckBox" accessibleText="month" text="January" textFill="#358cc9" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                                   <font>
+                                                      <Font name="System Bold" size="15.0" />
+                                                   </font>
+                                                   <GridPane.margin>
+                                                      <Insets left="30.0" />
+                                                   </GridPane.margin>
+                                                </JFXCheckBox>
+                                                <JFXCheckBox fx:id="febuaryCheckBox" accessibleText="month" text="Febuary" textFill="#358cc9" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                                   <font>
+                                                      <Font name="System Bold" size="15.0" />
+                                                   </font>
+                                                   <GridPane.margin>
+                                                      <Insets left="30.0" />
+                                                   </GridPane.margin>
+                                                </JFXCheckBox>
+                                                <JFXCheckBox fx:id="marchCheckBox" accessibleText="month" text="March" textFill="#358cc9" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                                   <font>
+                                                      <Font name="System Bold" size="15.0" />
+                                                   </font>
+                                                   <GridPane.margin>
+                                                      <Insets left="30.0" />
+                                                   </GridPane.margin>
+                                                </JFXCheckBox>
+                                                <JFXCheckBox fx:id="aprilCheckBox" accessibleText="month" text="April" textFill="#358cc9" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                                                   <font>
+                                                      <Font name="System Bold" size="15.0" />
+                                                   </font>
+                                                   <GridPane.margin>
+                                                      <Insets left="30.0" />
+                                                   </GridPane.margin>
+                                                </JFXCheckBox>
+                                                <JFXCheckBox fx:id="mayCheckBox" accessibleText="month" text="May" textFill="#358cc9" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                                                   <font>
+                                                      <Font name="System Bold" size="15.0" />
+                                                   </font>
+                                                   <GridPane.margin>
+                                                      <Insets left="30.0" />
+                                                   </GridPane.margin>
+                                                </JFXCheckBox>
+                                                <JFXCheckBox fx:id="juneCheckBox" accessibleText="month" text="June" textFill="#358cc9" GridPane.columnIndex="1" GridPane.rowIndex="6">
+                                                   <font>
+                                                      <Font name="System Bold" size="15.0" />
+                                                   </font>
+                                                   <GridPane.margin>
+                                                      <Insets left="30.0" />
+                                                   </GridPane.margin>
+                                                </JFXCheckBox>
+                                                <JFXCheckBox fx:id="julyCheckBox" accessibleText="month" text="July" textFill="#358cc9" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                                                   <font>
+                                                      <Font name="System Bold" size="15.0" />
+                                                   </font>
+                                                   <GridPane.margin>
+                                                      <Insets left="30.0" />
+                                                   </GridPane.margin>
+                                                </JFXCheckBox>
+                                                <JFXCheckBox fx:id="augustCheckBox" accessibleText="month" text="August" textFill="#358cc9" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                                                   <font>
+                                                      <Font name="System Bold" size="15.0" />
+                                                   </font>
+                                                   <GridPane.margin>
+                                                      <Insets left="30.0" />
+                                                   </GridPane.margin>
+                                                </JFXCheckBox>
+                                                <JFXCheckBox fx:id="septemberCheckBox" accessibleText="month" text="September" textFill="#358cc9" GridPane.columnIndex="2" GridPane.rowIndex="3">
+                                                   <font>
+                                                      <Font name="System Bold" size="15.0" />
+                                                   </font>
+                                                   <GridPane.margin>
+                                                      <Insets left="30.0" />
+                                                   </GridPane.margin>
+                                                </JFXCheckBox>
+                                                <JFXCheckBox fx:id="octoberCheckBox" accessibleText="month" text="October" textFill="#358cc9" GridPane.columnIndex="2" GridPane.rowIndex="4">
+                                                   <font>
+                                                      <Font name="System Bold" size="15.0" />
+                                                   </font>
+                                                   <GridPane.margin>
+                                                      <Insets left="30.0" />
+                                                   </GridPane.margin>
+                                                </JFXCheckBox>
+                                                <JFXCheckBox fx:id="novemberCheckBox" accessibleText="month" text="November" textFill="#358cc9" GridPane.columnIndex="2" GridPane.rowIndex="5">
+                                                   <font>
+                                                      <Font name="System Bold" size="15.0" />
+                                                   </font>
+                                                   <GridPane.margin>
+                                                      <Insets left="30.0" />
+                                                   </GridPane.margin>
+                                                </JFXCheckBox>
+                                                <JFXCheckBox fx:id="decemberCheckBox" accessibleText="month" text="December" textFill="#358cc9" GridPane.columnIndex="2" GridPane.rowIndex="6">
+                                                   <font>
+                                                      <Font name="System Bold" size="15.0" />
+                                                   </font>
+                                                   <GridPane.margin>
+                                                      <Insets left="30.0" />
+                                                   </GridPane.margin>
+                                                </JFXCheckBox>
+                                             </children>
+                                          </GridPane>
+                                       </children>
+                                    </AnchorPane>
+                              </content>
+                            </Tab>
+                            <Tab text="Minutes">
+                              <content>
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                       <children>
+                                          <GridPane fx:id="minutesGrid" layoutX="24.0" layoutY="31.0" prefHeight="395.0" prefWidth="372.0">
+                                            <columnConstraints>
+                                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="75.0" minWidth="50.0" prefWidth="75.0" />
+                                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="75.0" minWidth="50.0" prefWidth="75.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="75.0" minWidth="50.0" prefWidth="66.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="75.0" minWidth="50.0" prefWidth="68.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="75.0" minWidth="50.0" prefWidth="113.0" />
+                                            </columnConstraints>
+                                            <rowConstraints>
+                                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                            </rowConstraints>
+                                             <children>
+                                                <JFXCheckBox fx:id="minute00CheckBox" text="00" textFill="#6b36c7">
+                                                   <font>
+                                                      <Font name="System Bold" size="15.0" />
+                                                   </font>
+                                                   <GridPane.margin>
+                                                      <Insets left="10.0" />
+                                                   </GridPane.margin>
+                                                </JFXCheckBox>
+                                                <JFXCheckBox fx:id="minute01CheckBox" text="01" textFill="#6b36c7" GridPane.columnIndex="1">
+                                                   <font>
+                                                      <Font name="System Bold" size="15.0" />
+                                                   </font>
+                                                   <GridPane.margin>
+                                                      <Insets left="10.0" />
+                                                   </GridPane.margin>
+                                                </JFXCheckBox>
+                                                <JFXCheckBox fx:id="minute02CheckBox" text="02" textFill="#6b36c7" GridPane.columnIndex="2">
+                                                   <font>
+                                                      <Font name="System Bold" size="15.0" />
+                                                   </font>
+                                                   <GridPane.margin>
+                                                      <Insets left="10.0" />
+                                                   </GridPane.margin>
+                                                </JFXCheckBox>
+                                                <JFXCheckBox fx:id="minute03CheckBox" text="03" textFill="#6b36c7" GridPane.columnIndex="3">
+                                                   <font>
+                                                      <Font name="System Bold" size="15.0" />
+                                                   </font>
+                                                   <GridPane.margin>
+                                                      <Insets left="10.0" />
+                                                   </GridPane.margin>
+                                                </JFXCheckBox>
+                                                <JFXCheckBox fx:id="minute04CheckBox" text="04" textFill="#6b36c7" GridPane.columnIndex="4">
+                                                   <font>
+                                                      <Font name="System Bold" size="15.0" />
+                                                   </font>
+                                                   <GridPane.margin>
+                                                      <Insets left="10.0" />
+                                                   </GridPane.margin>
+                                                </JFXCheckBox>
+                                                <JFXCheckBox fx:id="minute05CheckBox" text="05" textFill="#6b36c7" GridPane.rowIndex="1">
+                                                   <font>
+                                                      <Font name="System Bold" size="15.0" />
+                                                   </font>
+                                                   <GridPane.margin>
+                                                      <Insets left="10.0" />
+                                                   </GridPane.margin>
+                                                </JFXCheckBox>
+                                                <JFXCheckBox fx:id="minute06CheckBox" text="06" textFill="#6b36c7" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                                   <font>
+                                                      <Font name="System Bold" size="15.0" />
+                                                   </font>
+                                                   <GridPane.margin>
+                                                      <Insets left="10.0" />
+                                                   </GridPane.margin>
+                                                </JFXCheckBox>
+                                                <JFXCheckBox fx:id="minute07CheckBox" text="07" textFill="#6b36c7" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                                                   <font>
+                                                      <Font name="System Bold" size="15.0" />
+                                                   </font>
+                                                   <GridPane.margin>
+                                                      <Insets left="10.0" />
+                                                   </GridPane.margin>
+                                                </JFXCheckBox>
+                                                <JFXCheckBox fx:id="minute08CheckBox" text="08" textFill="#6b36c7" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                                                   <font>
+                                                      <Font name="System Bold" size="15.0" />
+                                                   </font>
+                                                   <GridPane.margin>
+                                                      <Insets left="10.0" />
+                                                   </GridPane.margin>
+                                                </JFXCheckBox>
+                                                <JFXCheckBox fx:id="minute09CheckBox" text="09" textFill="#6b36c7" GridPane.columnIndex="4" GridPane.rowIndex="1">
+                                                   <font>
+                                                      <Font name="System Bold" size="15.0" />
+                                                   </font>
+                                                   <GridPane.margin>
+                                                      <Insets left="10.0" />
+                                                   </GridPane.margin>
+                                                </JFXCheckBox>
+                                                <JFXCheckBox fx:id="minute10CheckBox" text="10" textFill="#6b36c7" GridPane.rowIndex="2">
+                                                   <font>
+                                                      <Font name="System Bold" size="15.0" />
+                                                   </font>
+                                                   <GridPane.margin>
+                                                      <Insets left="10.0" />
+                                                   </GridPane.margin>
+                                                </JFXCheckBox>
+                                                <JFXCheckBox fx:id="minute11CheckBox" text="11" textFill="#6b36c7" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                                   <font>
+                                                      <Font name="System Bold" size="15.0" />
+                                                   </font>
+                                                   <GridPane.margin>
+                                                      <Insets left="10.0" />
+                                                   </GridPane.margin>
+                                                </JFXCheckBox>
+                                                <JFXCheckBox fx:id="minute12CheckBox" text="12" textFill="#6b36c7" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                                                   <font>
+                                                      <Font name="System Bold" size="15.0" />
+                                                   </font>
+                                                   <GridPane.margin>
+                                                      <Insets left="10.0" />
+                                                   </GridPane.margin>
+                                                </JFXCheckBox>
+                                                <JFXCheckBox fx:id="minute13CheckBox" text="13" textFill="#6b36c7" GridPane.columnIndex="3" GridPane.rowIndex="2">
+                                                   <font>
+                                                      <Font name="System Bold" size="15.0" />
+                                                   </font>
+                                                   <GridPane.margin>
+                                                      <Insets left="10.0" />
+                                                   </GridPane.margin>
+                                                </JFXCheckBox>
+                                                <JFXCheckBox fx:id="minute14CheckBox" text="14" textFill="#6b36c7" GridPane.columnIndex="4" GridPane.rowIndex="2">
+                                                   <font>
+                                                      <Font name="System Bold" size="15.0" />
+                                                   </font>
+                                                   <GridPane.margin>
+                                                      <Insets left="10.0" />
+                                                   </GridPane.margin>
+                                                </JFXCheckBox>
+                                                <JFXCheckBox fx:id="minute15CheckBox" text="15" textFill="#6b36c7" GridPane.rowIndex="3">
+                                                   <font>
+                                                      <Font name="System Bold" size="15.0" />
+                                                   </font>
+                                                   <GridPane.margin>
+                                                      <Insets left="10.0" />
+                                                   </GridPane.margin>
+                                                </JFXCheckBox>
+                                                <JFXCheckBox fx:id="minute16CheckBox" text="16" textFill="#6b36c7" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                                   <font>
+                                                      <Font name="System Bold" size="15.0" />
+                                                   </font>
+                                                   <GridPane.margin>
+                                                      <Insets left="10.0" />
+                                                   </GridPane.margin>
+                                                </JFXCheckBox>
+                                                <JFXCheckBox fx:id="minute17CheckBox" text="17" textFill="#6b36c7" GridPane.columnIndex="2" GridPane.rowIndex="3">
+                                                   <font>
+                                                      <Font name="System Bold" size="15.0" />
+                                                   </font>
+                                                   <GridPane.margin>
+                                                      <Insets left="10.0" />
+                                                   </GridPane.margin>
+                                                </JFXCheckBox>
+                                                <JFXCheckBox fx:id="minute18CheckBox" text="18" textFill="#6b36c7" GridPane.columnIndex="3" GridPane.rowIndex="3">
+                                                   <font>
+                                                      <Font name="System Bold" size="15.0" />
+                                                   </font>
+                                                   <GridPane.margin>
+                                                      <Insets left="10.0" />
+                                                   </GridPane.margin>
+                                                </JFXCheckBox>
+                                                <JFXCheckBox fx:id="minute19CheckBox" text="19" textFill="#6b36c7" GridPane.columnIndex="4" GridPane.rowIndex="3">
+                                                   <font>
+                                                      <Font name="System Bold" size="15.0" />
+                                                   </font>
+                                                   <GridPane.margin>
+                                                      <Insets left="10.0" />
+                                                   </GridPane.margin>
+                                                </JFXCheckBox>
+                                                <JFXCheckBox fx:id="minute20CheckBox" text="20" textFill="#6b36c7" GridPane.rowIndex="4">
+                                                   <font>
+                                                      <Font name="System Bold" size="15.0" />
+                                                   </font>
+                                                   <GridPane.margin>
+                                                      <Insets left="10.0" />
+                                                   </GridPane.margin>
+                                                </JFXCheckBox>
+                                                <JFXCheckBox fx:id="minute21CheckBox" text="21" textFill="#6b36c7" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                                                   <font>
+                                                      <Font name="System Bold" size="15.0" />
+                                                   </font>
+                                                   <GridPane.margin>
+                                                      <Insets left="10.0" />
+                                                   </GridPane.margin>
+                                                </JFXCheckBox>
+                                                <JFXCheckBox fx:id="minute22CheckBox" text="22" textFill="#6b36c7" GridPane.columnIndex="2" GridPane.rowIndex="4">
+                                                   <font>
+                                                      <Font name="System Bold" size="15.0" />
+                                                   </font>
+                                                   <GridPane.margin>
+                                                      <Insets left="10.0" />
+                                                   </GridPane.margin>
+                                                </JFXCheckBox>
+                                                <JFXCheckBox fx:id="minute23CheckBox" text="23" textFill="#6b36c7" GridPane.columnIndex="3" GridPane.rowIndex="4">
+                                                   <font>
+                                                      <Font name="System Bold" size="15.0" />
+                                                   </font>
+                                                   <GridPane.margin>
+                                                      <Insets left="10.0" />
+                                                   </GridPane.margin>
+                                                </JFXCheckBox>
+                                                <JFXCheckBox fx:id="minute24CheckBox" text="24" textFill="#6b36c7" GridPane.columnIndex="4" GridPane.rowIndex="4">
+                                                   <font>
+                                                      <Font name="System Bold" size="15.0" />
+                                                   </font>
+                                                   <GridPane.margin>
+                                                      <Insets left="10.0" />
+                                                   </GridPane.margin>
+                                                </JFXCheckBox>
+                                                <JFXCheckBox fx:id="minute25CheckBox" text="25" textFill="#6b36c7" GridPane.rowIndex="5">
+                                                   <font>
+                                                      <Font name="System Bold" size="15.0" />
+                                                   </font>
+                                                   <GridPane.margin>
+                                                      <Insets left="10.0" />
+                                                   </GridPane.margin>
+                                                </JFXCheckBox>
+                                                <JFXCheckBox fx:id="minute26CheckBox" text="26" textFill="#6b36c7" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                                                   <font>
+                                                      <Font name="System Bold" size="15.0" />
+                                                   </font>
+                                                   <GridPane.margin>
+                                                      <Insets left="10.0" />
+                                                   </GridPane.margin>
+                                                </JFXCheckBox>
+                                                <JFXCheckBox fx:id="minute27CheckBox" text="27" textFill="#6b36c7" GridPane.columnIndex="2" GridPane.rowIndex="5">
+                                                   <font>
+                                                      <Font name="System Bold" size="15.0" />
+                                                   </font>
+                                                   <GridPane.margin>
+                                                      <Insets left="10.0" />
+                                                   </GridPane.margin>
+                                                </JFXCheckBox>
+                                                <JFXCheckBox fx:id="minute28CheckBox" text="28" textFill="#6b36c7" GridPane.columnIndex="3" GridPane.rowIndex="5">
+                                                   <font>
+                                                      <Font name="System Bold" size="15.0" />
+                                                   </font>
+                                                   <GridPane.margin>
+                                                      <Insets left="10.0" />
+                                                   </GridPane.margin>
+                                                </JFXCheckBox>
+                                                <JFXCheckBox fx:id="minute29CheckBox" text="29" textFill="#6b36c7" GridPane.columnIndex="4" GridPane.rowIndex="5">
+                                                   <font>
+                                                      <Font name="System Bold" size="15.0" />
+                                                   </font>
+                                                   <GridPane.margin>
+                                                      <Insets left="10.0" />
+                                                   </GridPane.margin>
+                                                </JFXCheckBox>
+                                                <JFXCheckBox fx:id="minute30CheckBox" text="30" textFill="#6b36c7" GridPane.rowIndex="6">
+                                                   <font>
+                                                      <Font name="System Bold" size="15.0" />
+                                                   </font>
+                                                   <GridPane.margin>
+                                                      <Insets left="10.0" />
+                                                   </GridPane.margin>
+                                                </JFXCheckBox>
+                                                <JFXCheckBox fx:id="minute31CheckBox" text="31" textFill="#6b36c7" GridPane.columnIndex="1" GridPane.rowIndex="6">
+                                                   <font>
+                                                      <Font name="System Bold" size="15.0" />
+                                                   </font>
+                                                   <GridPane.margin>
+                                                      <Insets left="10.0" />
+                                                   </GridPane.margin>
+                                                </JFXCheckBox>
+                                                <JFXCheckBox fx:id="minute32CheckBox" text="32" textFill="#6b36c7" GridPane.columnIndex="2" GridPane.rowIndex="6">
+                                                   <font>
+                                                      <Font name="System Bold" size="15.0" />
+                                                   </font>
+                                                   <GridPane.margin>
+                                                      <Insets left="10.0" />
+                                                   </GridPane.margin>
+                                                </JFXCheckBox>
+                                                <JFXCheckBox fx:id="minute33CheckBox" text="33" textFill="#6b36c7" GridPane.columnIndex="3" GridPane.rowIndex="6">
+                                                   <font>
+                                                      <Font name="System Bold" size="15.0" />
+                                                   </font>
+                                                   <GridPane.margin>
+                                                      <Insets left="10.0" />
+                                                   </GridPane.margin>
+                                                </JFXCheckBox>
+                                                <JFXCheckBox fx:id="minute34CheckBox" text="34" textFill="#6b36c7" GridPane.columnIndex="4" GridPane.rowIndex="6">
+                                                   <font>
+                                                      <Font name="System Bold" size="15.0" />
+                                                   </font>
+                                                   <GridPane.margin>
+                                                      <Insets left="10.0" />
+                                                   </GridPane.margin>
+                                                </JFXCheckBox>
+                                                <JFXCheckBox fx:id="minute35CheckBox" text="35" textFill="#6b36c7" GridPane.rowIndex="7">
+                                                   <font>
+                                                      <Font name="System Bold" size="15.0" />
+                                                   </font>
+                                                   <GridPane.margin>
+                                                      <Insets left="10.0" />
+                                                   </GridPane.margin>
+                                                </JFXCheckBox>
+                                                <JFXCheckBox fx:id="minute36CheckBox" text="36" textFill="#6b36c7" GridPane.columnIndex="1" GridPane.rowIndex="7">
+                                                   <font>
+                                                      <Font name="System Bold" size="15.0" />
+                                                   </font>
+                                                   <GridPane.margin>
+                                                      <Insets left="10.0" />
+                                                   </GridPane.margin>
+                                                </JFXCheckBox>
+                                                <JFXCheckBox fx:id="minute37CheckBox" text="37" textFill="#6b36c7" GridPane.columnIndex="2" GridPane.rowIndex="7">
+                                                   <font>
+                                                      <Font name="System Bold" size="15.0" />
+                                                   </font>
+                                                   <GridPane.margin>
+                                                      <Insets left="10.0" />
+                                                   </GridPane.margin>
+                                                </JFXCheckBox>
+                                                <JFXCheckBox fx:id="minute38CheckBox" text="38" textFill="#6b36c7" GridPane.columnIndex="3" GridPane.rowIndex="7">
+                                                   <font>
+                                                      <Font name="System Bold" size="15.0" />
+                                                   </font>
+                                                   <GridPane.margin>
+                                                      <Insets left="10.0" />
+                                                   </GridPane.margin>
+                                                </JFXCheckBox>
+                                                <JFXCheckBox fx:id="minute39CheckBox" text="39" textFill="#6b36c7" GridPane.columnIndex="4" GridPane.rowIndex="7">
+                                                   <font>
+                                                      <Font name="System Bold" size="15.0" />
+                                                   </font>
+                                                   <GridPane.margin>
+                                                      <Insets left="10.0" />
+                                                   </GridPane.margin>
+                                                </JFXCheckBox>
+                                                <JFXCheckBox fx:id="minute40CheckBox" text="40" textFill="#6b36c7" GridPane.rowIndex="8">
+                                                   <font>
+                                                      <Font name="System Bold" size="15.0" />
+                                                   </font>
+                                                   <GridPane.margin>
+                                                      <Insets left="10.0" />
+                                                   </GridPane.margin>
+                                                </JFXCheckBox>
+                                                <JFXCheckBox fx:id="minute41CheckBox" text="41" textFill="#6b36c7" GridPane.columnIndex="1" GridPane.rowIndex="8">
+                                                   <font>
+                                                      <Font name="System Bold" size="15.0" />
+                                                   </font>
+                                                   <GridPane.margin>
+                                                      <Insets left="10.0" />
+                                                   </GridPane.margin>
+                                                </JFXCheckBox>
+                                                <JFXCheckBox fx:id="minute42CheckBox" text="42" textFill="#6b36c7" GridPane.columnIndex="2" GridPane.rowIndex="8">
+                                                   <font>
+                                                      <Font name="System Bold" size="15.0" />
+                                                   </font>
+                                                   <GridPane.margin>
+                                                      <Insets left="10.0" />
+                                                   </GridPane.margin>
+                                                </JFXCheckBox>
+                                                <JFXCheckBox fx:id="minute43CheckBox" text="43" textFill="#6b36c7" GridPane.columnIndex="3" GridPane.rowIndex="8">
+                                                   <font>
+                                                      <Font name="System Bold" size="15.0" />
+                                                   </font>
+                                                   <GridPane.margin>
+                                                      <Insets left="10.0" />
+                                                   </GridPane.margin>
+                                                </JFXCheckBox>
+                                                <JFXCheckBox fx:id="minute44CheckBox" text="44" textFill="#6b36c7" GridPane.columnIndex="4" GridPane.rowIndex="8">
+                                                   <font>
+                                                      <Font name="System Bold" size="15.0" />
+                                                   </font>
+                                                   <GridPane.margin>
+                                                      <Insets left="10.0" />
+                                                   </GridPane.margin>
+                                                </JFXCheckBox>
+                                                <JFXCheckBox fx:id="minute45CheckBox" text="45" textFill="#6b36c7" GridPane.rowIndex="9">
+                                                   <font>
+                                                      <Font name="System Bold" size="15.0" />
+                                                   </font>
+                                                   <GridPane.margin>
+                                                      <Insets left="10.0" />
+                                                   </GridPane.margin>
+                                                </JFXCheckBox>
+                                                <JFXCheckBox fx:id="minute46CheckBox" text="46" textFill="#6b36c7" GridPane.columnIndex="1" GridPane.rowIndex="9">
+                                                   <font>
+                                                      <Font name="System Bold" size="15.0" />
+                                                   </font>
+                                                   <GridPane.margin>
+                                                      <Insets left="10.0" />
+                                                   </GridPane.margin>
+                                                </JFXCheckBox>
+                                                <JFXCheckBox fx:id="minute47CheckBox" text="47" textFill="#6b36c7" GridPane.columnIndex="2" GridPane.rowIndex="9">
+                                                   <font>
+                                                      <Font name="System Bold" size="15.0" />
+                                                   </font>
+                                                   <GridPane.margin>
+                                                      <Insets left="10.0" />
+                                                   </GridPane.margin>
+                                                </JFXCheckBox>
+                                                <JFXCheckBox fx:id="minute48CheckBox" text="48" textFill="#6b36c7" GridPane.columnIndex="3" GridPane.rowIndex="9">
+                                                   <font>
+                                                      <Font name="System Bold" size="15.0" />
+                                                   </font>
+                                                   <GridPane.margin>
+                                                      <Insets left="10.0" />
+                                                   </GridPane.margin>
+                                                </JFXCheckBox>
+                                                <JFXCheckBox fx:id="minute49CheckBox" text="49" textFill="#6b36c7" GridPane.columnIndex="4" GridPane.rowIndex="9">
+                                                   <font>
+                                                      <Font name="System Bold" size="15.0" />
+                                                   </font>
+                                                   <GridPane.margin>
+                                                      <Insets left="10.0" />
+                                                   </GridPane.margin>
+                                                </JFXCheckBox>
+                                                <JFXCheckBox fx:id="minute50CheckBox" text="50" textFill="#6b36c7" GridPane.rowIndex="10">
+                                                   <font>
+                                                      <Font name="System Bold" size="15.0" />
+                                                   </font>
+                                                   <GridPane.margin>
+                                                      <Insets left="10.0" />
+                                                   </GridPane.margin>
+                                                </JFXCheckBox>
+                                                <JFXCheckBox fx:id="minute51CheckBox" text="51" textFill="#6b36c7" GridPane.columnIndex="1" GridPane.rowIndex="10">
+                                                   <font>
+                                                      <Font name="System Bold" size="15.0" />
+                                                   </font>
+                                                   <GridPane.margin>
+                                                      <Insets left="10.0" />
+                                                   </GridPane.margin>
+                                                </JFXCheckBox>
+                                                <JFXCheckBox fx:id="minute52CheckBox" text="52" textFill="#6b36c7" GridPane.columnIndex="2" GridPane.rowIndex="10">
+                                                   <font>
+                                                      <Font name="System Bold" size="15.0" />
+                                                   </font>
+                                                   <GridPane.margin>
+                                                      <Insets left="10.0" />
+                                                   </GridPane.margin>
+                                                </JFXCheckBox>
+                                                <JFXCheckBox fx:id="minute53CheckBox" text="53" textFill="#6b36c7" GridPane.columnIndex="3" GridPane.rowIndex="10">
+                                                   <font>
+                                                      <Font name="System Bold" size="15.0" />
+                                                   </font>
+                                                   <GridPane.margin>
+                                                      <Insets left="10.0" />
+                                                   </GridPane.margin>
+                                                </JFXCheckBox>
+                                                <JFXCheckBox fx:id="minute54CheckBox" text="54" textFill="#6b36c7" GridPane.columnIndex="4" GridPane.rowIndex="10">
+                                                   <font>
+                                                      <Font name="System Bold" size="15.0" />
+                                                   </font>
+                                                   <GridPane.margin>
+                                                      <Insets left="10.0" />
+                                                   </GridPane.margin>
+                                                </JFXCheckBox>
+                                                <JFXCheckBox fx:id="minute55CheckBox" text="55" textFill="#6b36c7" GridPane.rowIndex="11">
+                                                   <font>
+                                                      <Font name="System Bold" size="15.0" />
+                                                   </font>
+                                                   <GridPane.margin>
+                                                      <Insets left="10.0" />
+                                                   </GridPane.margin>
+                                                </JFXCheckBox>
+                                                <JFXCheckBox fx:id="minute56CheckBox" text="56" textFill="#6b36c7" GridPane.columnIndex="1" GridPane.rowIndex="11">
+                                                   <font>
+                                                      <Font name="System Bold" size="15.0" />
+                                                   </font>
+                                                   <GridPane.margin>
+                                                      <Insets left="10.0" />
+                                                   </GridPane.margin>
+                                                </JFXCheckBox>
+                                                <JFXCheckBox fx:id="minute57CheckBox" text="57" textFill="#6b36c7" GridPane.columnIndex="2" GridPane.rowIndex="11">
+                                                   <font>
+                                                      <Font name="System Bold" size="15.0" />
+                                                   </font>
+                                                   <GridPane.margin>
+                                                      <Insets left="10.0" />
+                                                   </GridPane.margin>
+                                                </JFXCheckBox>
+                                                <JFXCheckBox fx:id="minute58CheckBox" text="58" textFill="#6b36c7" GridPane.columnIndex="3" GridPane.rowIndex="11">
+                                                   <font>
+                                                      <Font name="System Bold" size="15.0" />
+                                                   </font>
+                                                   <GridPane.margin>
+                                                      <Insets left="10.0" />
+                                                   </GridPane.margin>
+                                                </JFXCheckBox>
+                                                <JFXCheckBox fx:id="minute59CheckBox" text="59" textFill="#6b36c7" GridPane.columnIndex="4" GridPane.rowIndex="11">
+                                                   <font>
+                                                      <Font name="System Bold" size="15.0" />
+                                                   </font>
+                                                   <GridPane.margin>
+                                                      <Insets left="10.0" />
+                                                   </GridPane.margin>
+                                                </JFXCheckBox>
+                                             </children>
+                                          </GridPane>
+                                          <VBox layoutX="406.0" layoutY="31.0" prefHeight="106.0" prefWidth="157.0" AnchorPane.bottomAnchor="314.0" AnchorPane.leftAnchor="436.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="31.0">
+                                             <children>
+                                                <Label alignment="CENTER" contentDisplay="CENTER" text="Repeat cron every" textFill="#6b36c7">
+                                                   <opaqueInsets>
+                                                      <Insets />
+                                                   </opaqueInsets>
+                                                   <VBox.margin>
+                                                      <Insets left="10.0" top="5.0" />
+                                                   </VBox.margin>
+                                                   <font>
+                                                      <Font name="System Bold" size="15.0" />
+                                                   </font>
+                                                </Label>
+                                                <ComboBox fx:id="everyMinuteComboBox" maxHeight="30.0" maxWidth="70.0" minHeight="30.0" minWidth="70.0" onAction="#everyMinuteComboBoxAction" prefHeight="30.0" prefWidth="70.0">
+                                                   <opaqueInsets>
+                                                      <Insets />
+                                                   </opaqueInsets>
+                                                   <VBox.margin>
+                                                      <Insets left="10.0" top="10.0" />
+                                                   </VBox.margin>
+                                                </ComboBox>
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                    </AnchorPane>
+                              </content>
+                            </Tab>
+                              <Tab text="Hours">
+                                 <content>
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                       <children>
+                                          <GridPane fx:id="hoursGrid" layoutX="24.0" layoutY="31.0" prefHeight="310.0" prefWidth="408.0">
+                                             <columnConstraints>
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="75.0" minWidth="50.0" prefWidth="75.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="75.0" minWidth="50.0" prefWidth="75.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="75.0" minWidth="50.0" prefWidth="66.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="75.0" minWidth="50.0" prefWidth="68.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="75.0" minWidth="50.0" prefWidth="113.0" />
+                                             </columnConstraints>
+                                             <rowConstraints>
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                             </rowConstraints>
+                                             <children>
+                                                <JFXCheckBox fx:id="hour00CheckBox" text="00" textFill="#3864c7">
+                                                   <font>
+                                                      <Font name="System Bold" size="15.0" />
+                                                   </font>
+                                                   <GridPane.margin>
+                                                      <Insets left="10.0" />
+                                                   </GridPane.margin>
+                                                </JFXCheckBox>
+                                                <JFXCheckBox fx:id="hour01CheckBox" text="01" textFill="#3864c7" GridPane.columnIndex="1">
+                                                   <font>
+                                                      <Font name="System Bold" size="15.0" />
+                                                   </font>
+                                                   <GridPane.margin>
+                                                      <Insets left="10.0" />
+                                                   </GridPane.margin>
+                                                </JFXCheckBox>
+                                                <JFXCheckBox fx:id="hour02CheckBox" text="02" textFill="#3864c7" GridPane.columnIndex="2">
+                                                   <font>
+                                                      <Font name="System Bold" size="15.0" />
+                                                   </font>
+                                                   <GridPane.margin>
+                                                      <Insets left="10.0" />
+                                                   </GridPane.margin>
+                                                </JFXCheckBox>
+                                                <JFXCheckBox fx:id="hour03CheckBox" text="03" textFill="#3864c7" GridPane.columnIndex="3">
+                                                   <font>
+                                                      <Font name="System Bold" size="15.0" />
+                                                   </font>
+                                                   <GridPane.margin>
+                                                      <Insets left="10.0" />
+                                                   </GridPane.margin>
+                                                </JFXCheckBox>
+                                                <JFXCheckBox fx:id="hour04CheckBox" text="04" textFill="#3864c7" GridPane.columnIndex="4">
+                                                   <font>
+                                                      <Font name="System Bold" size="15.0" />
+                                                   </font>
+                                                   <GridPane.margin>
+                                                      <Insets left="10.0" />
+                                                   </GridPane.margin>
+                                                </JFXCheckBox>
+                                                <JFXCheckBox fx:id="hour05CheckBox" text="05" textFill="#3864c7" GridPane.rowIndex="1">
+                                                   <font>
+                                                      <Font name="System Bold" size="15.0" />
+                                                   </font>
+                                                   <GridPane.margin>
+                                                      <Insets left="10.0" />
+                                                   </GridPane.margin>
+                                                </JFXCheckBox>
+                                                <JFXCheckBox fx:id="hour06CheckBox" text="06" textFill="#3864c7" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                                   <font>
+                                                      <Font name="System Bold" size="15.0" />
+                                                   </font>
+                                                   <GridPane.margin>
+                                                      <Insets left="10.0" />
+                                                   </GridPane.margin>
+                                                </JFXCheckBox>
+                                                <JFXCheckBox fx:id="hour07CheckBox" text="07" textFill="#3864c7" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                                                   <font>
+                                                      <Font name="System Bold" size="15.0" />
+                                                   </font>
+                                                   <GridPane.margin>
+                                                      <Insets left="10.0" />
+                                                   </GridPane.margin>
+                                                </JFXCheckBox>
+                                                <JFXCheckBox fx:id="hour08CheckBox" text="08" textFill="#3864c7" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                                                   <font>
+                                                      <Font name="System Bold" size="15.0" />
+                                                   </font>
+                                                   <GridPane.margin>
+                                                      <Insets left="10.0" />
+                                                   </GridPane.margin>
+                                                </JFXCheckBox>
+                                                <JFXCheckBox fx:id="hour09CheckBox" text="09" textFill="#3864c7" GridPane.columnIndex="4" GridPane.rowIndex="1">
+                                                   <font>
+                                                      <Font name="System Bold" size="15.0" />
+                                                   </font>
+                                                   <GridPane.margin>
+                                                      <Insets left="10.0" />
+                                                   </GridPane.margin>
+                                                </JFXCheckBox>
+                                                <JFXCheckBox fx:id="hour10CheckBox" text="10" textFill="#3864c7" GridPane.rowIndex="2">
+                                                   <font>
+                                                      <Font name="System Bold" size="15.0" />
+                                                   </font>
+                                                   <GridPane.margin>
+                                                      <Insets left="10.0" />
+                                                   </GridPane.margin>
+                                                </JFXCheckBox>
+                                                <JFXCheckBox fx:id="hour11CheckBox" text="11" textFill="#3864c7" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                                   <font>
+                                                      <Font name="System Bold" size="15.0" />
+                                                   </font>
+                                                   <GridPane.margin>
+                                                      <Insets left="10.0" />
+                                                   </GridPane.margin>
+                                                </JFXCheckBox>
+                                                <JFXCheckBox fx:id="hour12CheckBox" text="12" textFill="#3864c7" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                                                   <font>
+                                                      <Font name="System Bold" size="15.0" />
+                                                   </font>
+                                                   <GridPane.margin>
+                                                      <Insets left="10.0" />
+                                                   </GridPane.margin>
+                                                </JFXCheckBox>
+                                                <JFXCheckBox fx:id="hour13CheckBox" text="13" textFill="#3864c7" GridPane.columnIndex="3" GridPane.rowIndex="2">
+                                                   <font>
+                                                      <Font name="System Bold" size="15.0" />
+                                                   </font>
+                                                   <GridPane.margin>
+                                                      <Insets left="10.0" />
+                                                   </GridPane.margin>
+                                                </JFXCheckBox>
+                                                <JFXCheckBox fx:id="hour14CheckBox" text="14" textFill="#3864c7" GridPane.columnIndex="4" GridPane.rowIndex="2">
+                                                   <font>
+                                                      <Font name="System Bold" size="15.0" />
+                                                   </font>
+                                                   <GridPane.margin>
+                                                      <Insets left="10.0" />
+                                                   </GridPane.margin>
+                                                </JFXCheckBox>
+                                                <JFXCheckBox fx:id="hour15CheckBox" text="15" textFill="#3864c7" GridPane.rowIndex="3">
+                                                   <font>
+                                                      <Font name="System Bold" size="15.0" />
+                                                   </font>
+                                                   <GridPane.margin>
+                                                      <Insets left="10.0" />
+                                                   </GridPane.margin>
+                                                </JFXCheckBox>
+                                                <JFXCheckBox fx:id="hour16CheckBox" text="16" textFill="#3864c7" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                                   <font>
+                                                      <Font name="System Bold" size="15.0" />
+                                                   </font>
+                                                   <GridPane.margin>
+                                                      <Insets left="10.0" />
+                                                   </GridPane.margin>
+                                                </JFXCheckBox>
+                                                <JFXCheckBox fx:id="hour17CheckBox" text="17" textFill="#3864c7" GridPane.columnIndex="2" GridPane.rowIndex="3">
+                                                   <font>
+                                                      <Font name="System Bold" size="15.0" />
+                                                   </font>
+                                                   <GridPane.margin>
+                                                      <Insets left="10.0" />
+                                                   </GridPane.margin>
+                                                </JFXCheckBox>
+                                                <JFXCheckBox fx:id="hour18CheckBox" text="18" textFill="#3864c7" GridPane.columnIndex="3" GridPane.rowIndex="3">
+                                                   <font>
+                                                      <Font name="System Bold" size="15.0" />
+                                                   </font>
+                                                   <GridPane.margin>
+                                                      <Insets left="10.0" />
+                                                   </GridPane.margin>
+                                                </JFXCheckBox>
+                                                <JFXCheckBox fx:id="hour19CheckBox" text="19" textFill="#3864c7" GridPane.columnIndex="4" GridPane.rowIndex="3">
+                                                   <font>
+                                                      <Font name="System Bold" size="15.0" />
+                                                   </font>
+                                                   <GridPane.margin>
+                                                      <Insets left="10.0" />
+                                                   </GridPane.margin>
+                                                </JFXCheckBox>
+                                                <JFXCheckBox fx:id="hour20CheckBox" text="20" textFill="#3864c7" GridPane.rowIndex="4">
+                                                   <font>
+                                                      <Font name="System Bold" size="15.0" />
+                                                   </font>
+                                                   <GridPane.margin>
+                                                      <Insets left="10.0" />
+                                                   </GridPane.margin>
+                                                </JFXCheckBox>
+                                                <JFXCheckBox fx:id="hour21CheckBox" text="21" textFill="#3864c7" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                                                   <font>
+                                                      <Font name="System Bold" size="15.0" />
+                                                   </font>
+                                                   <GridPane.margin>
+                                                      <Insets left="10.0" />
+                                                   </GridPane.margin>
+                                                </JFXCheckBox>
+                                                <JFXCheckBox fx:id="hour22CheckBox" text="22" textFill="#3864c7" GridPane.columnIndex="2" GridPane.rowIndex="4">
+                                                   <font>
+                                                      <Font name="System Bold" size="15.0" />
+                                                   </font>
+                                                   <GridPane.margin>
+                                                      <Insets left="10.0" />
+                                                   </GridPane.margin>
+                                                </JFXCheckBox>
+                                                <JFXCheckBox fx:id="hour23CheckBox" text="23" textFill="#3864c7" GridPane.columnIndex="3" GridPane.rowIndex="4">
+                                                   <font>
+                                                      <Font name="System Bold" size="15.0" />
+                                                   </font>
+                                                   <GridPane.margin>
+                                                      <Insets left="10.0" />
+                                                   </GridPane.margin>
+                                                </JFXCheckBox>
+                                                <JFXCheckBox fx:id="hour24CheckBox" text="24" textFill="#3864c7" GridPane.columnIndex="4" GridPane.rowIndex="4">
+                                                   <font>
+                                                      <Font name="System Bold" size="15.0" />
+                                                   </font>
+                                                   <GridPane.margin>
+                                                      <Insets left="10.0" />
+                                                   </GridPane.margin>
+                                                </JFXCheckBox>
+                                             </children>
+                                          </GridPane>
+                                          <VBox layoutX="432.0" layoutY="31.0" prefHeight="106.0" prefWidth="157.0" AnchorPane.bottomAnchor="314.0" AnchorPane.leftAnchor="436.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="31.0">
+                                             <children>
+                                                <Label alignment="CENTER" contentDisplay="CENTER" text="Repeat cron every" textFill="#3864c7">
+                                                   <opaqueInsets>
+                                                      <Insets />
+                                                   </opaqueInsets>
+                                                   <VBox.margin>
+                                                      <Insets left="10.0" top="5.0" />
+                                                   </VBox.margin>
+                                                   <font>
+                                                      <Font name="System Bold" size="15.0" />
+                                                   </font>
+                                                </Label>
+                                                <ComboBox fx:id="everyHourComboBox" maxHeight="30.0" maxWidth="70.0" minHeight="30.0" minWidth="70.0" onAction="#everyHourComboBoxAction" prefHeight="30.0" prefWidth="70.0">
+                                                   <VBox.margin>
+                                                      <Insets left="10.0" top="10.0" />
+                                                   </VBox.margin>
+                                                </ComboBox>
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                    </AnchorPane>
+                                 </content>
+                              </Tab>
+                              <Tab text="Schedule">
+                                 <content>
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                       <children>
+                                          <Group layoutX="7.0" layoutY="21.0">
+                                             <children>
+                                                <ComboBox fx:id="argumentComboBox" editable="true" layoutX="138.0" layoutY="71.0" onAction="#argumentComboBoxAction" prefHeight="31.0" prefWidth="149.0" promptText="Enter Arguments" />
+                                                <JFXButton fx:id="argumentDeleteButton" alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" layoutX="15.0" layoutY="69.0" onAction="#argumentDeleteButtonAction" prefHeight="35.0" prefWidth="107.0" styleClass="primary-background" stylesheets="@style/style.css" text="Delete Args" />
+                                                <JFXButton fx:id="addScriptButton" alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" layoutX="17.0" layoutY="17.0" onAction="#addScriptButtonAction" prefHeight="35.0" prefWidth="103.0" styleClass="primary-background" stylesheets="@style/style.css" text="Add Script" />
+                                                <Text fx:id="scriptNameText" disable="true" layoutX="138.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="FileName ..." underline="true" wrappingWidth="361.21875" />
+                                                <Separator layoutX="7.0" prefHeight="17.0" prefWidth="541.0" />
+                                                <Separator layoutX="7.0" layoutY="52.0" prefHeight="17.0" prefWidth="541.0" />
+                                                <Separator layoutX="7.0" layoutY="104.0" prefHeight="17.0" prefWidth="541.0" />
+                                             </children>
+                                          </Group>
+                                          <Separator layoutX="21.0" layoutY="173.0" prefHeight="17.0" prefWidth="534.0" />
+                                          <Separator layoutX="18.0" layoutY="368.0" prefHeight="17.0" prefWidth="540.0" />
+                                          <JFXDatePicker fx:id="cronStartDate" layoutX="106.0" layoutY="192.0" maxHeight="30.0" maxWidth="120.0" minHeight="30.0" minWidth="120.0" prefHeight="30.0" prefWidth="120.0" />
+                                          <JFXDatePicker fx:id="cronEndDate" defaultColor="#8f0054" layoutX="364.0" layoutY="192.0" maxHeight="30.0" maxWidth="120.0" minHeight="30.0" minWidth="120.0" prefHeight="30.0" prefWidth="120.0" />
+                                          <Label layoutX="21.0" layoutY="199.0" text="Start Date:" textFill="#009688" />
+                                          <Label layoutX="291.0" layoutY="199.0" text="End Date:" textFill="#8f0054" />
+                                          <ComboBox fx:id="timezoneComboBox" layoutX="106.0" layoutY="322.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#timezoneComboBoxAction" prefHeight="28.0" prefWidth="168.0" promptText="Select a timezone" />
+                                          <JFXTimePicker fx:id="cronStartTime" editable="true" layoutX="106.0" layoutY="254.0" maxHeight="30.0" maxWidth="120.0" minHeight="30.0" minWidth="120.0" prefHeight="30.0" prefWidth="120.0" />
+                                          <Label layoutX="21.0" layoutY="269.0" text="Start Time:" textFill="#009688" />
+                                          <JFXTimePicker fx:id="cronEndTime" defaultColor="#8f0054" editable="true" layoutX="364.0" layoutY="254.0" maxHeight="30.0" maxWidth="120.0" minHeight="30.0" minWidth="120.0" prefHeight="30.0" prefWidth="120.0" />
+                                          <Label layoutX="290.0" layoutY="269.0" text="End Time:" textFill="#8f0054" />
+                                          <Separator layoutX="268.0" layoutY="186.0" orientation="VERTICAL" prefHeight="100.0" prefWidth="0.0" />
+                                          <Label layoutX="21.0" layoutY="329.0" text="Timezone:" />
+                                       </children>
+                                    </AnchorPane>
+                                 </content>
+                              </Tab>
+                          </tabs>
+                        </TabPane>
+                     </children>
+                  </AnchorPane>
+              </items>
+            </SplitPane>
+         </children></AnchorPane>
+  </items>
+</SplitPane>

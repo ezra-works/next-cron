@@ -1,0 +1,40 @@
+{
+	"cron": {
+		"id": 0,
+		"name": "cron001",
+		"status": "Disabled",
+		"weekdays": {
+			"on": [
+                "saturday"
+			]
+		},
+		"months": {
+			"on": [
+				"march",
+				"july",
+				"august"
+			]
+		},
+		"minutes": {
+			"on": [
+				0
+			]
+		},
+		"hours": {
+			"on": [
+				1
+			]
+		},
+		"script": "/Users/ezmoses/Downloads/HelloWorld.sh",
+		"parameter": [
+			"StringValue",
+			100,
+			100.2
+		],
+		"startDate": "",
+		"endDate": "",
+		"startTime": "",
+		"endTime": "",
+		"timeZone": "Australia/Sydney (UTC+11:00)"
+	}
+}
