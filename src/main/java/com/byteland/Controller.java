@@ -416,9 +416,9 @@ public class Controller {
     private ComboBox<String> timezoneComboBox; // Value injected by FXMLLoader
 
     // Load all the crons from db
+    private CronUtils cronUtils = new CronUtils();
     private CronLists cronLists = new CronLists();
     private Random random = new Random();
-    private CronUtils cronUtils = new CronUtils();
     private ObservableList<String> zoneLists = cronUtils.getTimeZoneList();
     private ObservableBooleanValue cStatus = new SimpleBooleanProperty();
 

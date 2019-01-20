@@ -91,6 +91,7 @@ public class CronExecute {
         if(cronLists.cronObservableList.hashCode() != initialCronsHash) {
 
             final List<Cron> collect = cronLists.cronObservableList.parallelStream()
+                    .filter(cron -> cron.getStatus().equalsIgnoreCase(CronConstants.CRON_ENABLED))
                     .filter(cron ->
                             LocalDate.parse(cron.getStartDate(), DateTimeFormatter.ISO_LOCAL_DATE).getYear()
                                     <= localDate.getYear())
