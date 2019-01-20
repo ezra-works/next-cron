@@ -759,8 +759,9 @@ public class Controller {
                 .addListener((observable, oldValue, newValue) -> {
 
                     if (newValue != null) {
-                        CronUtils.selectedCron = newValue;
-//                        System.out.println("newValue " + newValue);
+                        cronLists = new CronLists();
+                        CronUtils.selectedCron = cronLists.getCronById(newValue.getId()); //newValue;
+//                        System.out.println("newValue " + CronUtils.selectedCron.getStatus());
                         cStatus = new SimpleBooleanProperty(CronUtils.selectedCron.getStatus()
                                 .equalsIgnoreCase(CronConstants.CRON_ENABLED));
                         System.out.println("cStatus " + cStatus);

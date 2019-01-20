@@ -34,7 +34,7 @@ public class GridUtils {
     public void setCronWeeksMonth(GridPane gridPage, String wkMth) {
         gridPage.getChildren()
                 .filtered(node -> node instanceof JFXCheckBox)
-                .filtered(node -> node.getId().contains(wkMth))
+                .filtered(node -> node.getId().contains(wkMth.toLowerCase()))
                 .forEach(node -> ((JFXCheckBox) node).setSelected(true));
     }
     public List<Integer> getSelectedHoursMinutes(GridPane gridPage, String hrMin) {
@@ -59,7 +59,7 @@ public class GridUtils {
                 .filtered(node -> ((JFXCheckBox)node).isSelected())
                 .forEach(node -> {
                     JFXCheckBox jfxCheckBox = ((JFXCheckBox)node);
-                    selectList.add(jfxCheckBox.getText().toLowerCase());
+                    selectList.add(jfxCheckBox.getText().toUpperCase());
                 });
         return selectList;
     }

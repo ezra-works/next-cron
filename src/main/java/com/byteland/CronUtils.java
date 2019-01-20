@@ -32,8 +32,12 @@ public class CronUtils {
 
     public static Cron selectedCron;
 
+    public CronUtils() {
+        setupFolders();
+    }
+
     public static List<File> getCronFileList() {
-        try (Stream<Path> paths = Files.walk(Paths.get("/Users/ezmoses/IdeaProjects/next-cron/db"))) {
+        try (Stream<Path> paths = Files.walk(Paths.get(CronConstants.DATA_PATH))) {
             return paths
                     .filter(Files::isRegularFile)
                     .filter(path -> path.toString().endsWith(".json"))
@@ -74,7 +78,7 @@ public class CronUtils {
         if(! isMatched.get()) {
             System.out.println("No file found, so creating a new one");
             String fileName = cron.getId() + ".json";
-            File nFile = new File("/Users/ezmoses/IdeaProjects/next-cron/db/" + fileName);
+            File nFile = new File(CronConstants.DATA_PATH + "/" + fileName);
             try {
                 nFile.createNewFile();
                 wfile.set(nFile);
@@ -134,5 +138,20 @@ public class CronUtils {
         final ObservableList<String> zoneIds = FXCollections.observableArrayList(zoneLists);
         System.out.println("listZoneIds: " + zoneIds);
         return zoneIds;
+    }
+
+    private void setupFolders() {
+
+        Path path = Paths.get(CronConstants.DATA_PATH);
+        if (!Files.exists(path)) {
+            try {
+                Files.createDirectories(path);
+                if(Files.exists(path)) {
+                    System.out.println("path created " + path);
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

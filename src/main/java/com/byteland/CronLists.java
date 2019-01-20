@@ -54,4 +54,11 @@ public class CronLists {
         System.out.println("cronObservableList " + cronObservableList.sorted());
         return cronObservableList;
     }
+
+    public Cron getCronById(int cronId) {
+        return cronObservableList.stream()
+                .filter(cron -> cron.getId() == cronId)
+                .findFirst()
+                .orElse(null);
+    }
 }
