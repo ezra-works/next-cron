@@ -8,5 +8,6 @@ public class CronConstants {
     public static String CRON_FAILED = "Failed";
     public static String ARGUEMENT_STG = "Enter Arguments";
     public static String DATA_PATH = "./data";
+    public static String LOG_PATH = "./log";
     public static String CMD_PATH = "./";
 }

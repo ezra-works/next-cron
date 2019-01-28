@@ -17,16 +17,22 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.FileChooser;
 import javafx.util.Duration;
+import org.apache.commons.lang.SystemUtils;
 import org.controlsfx.control.Notifications;
 
 import java.io.File;
 import java.net.URL;
-import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Controller {
+
+    private static final Logger LOGGER = Logger.getLogger(Controller.class.getName());
 
     @FXML // ResourceBundle that was given to the FXMLLoader
     private ResourceBundle resources;
@@ -416,7 +422,7 @@ public class Controller {
     private ComboBox<String> timezoneComboBox; // Value injected by FXMLLoader
 
     // Load all the crons from db
-    private CronUtils cronUtils = new CronUtils();
+    private CronUtils cronUtils = new CronUtils(true);
     private CronLists cronLists = new CronLists();
     private Random random = new Random();
     private ObservableList<String> zoneLists = cronUtils.getTimeZoneList();
@@ -424,7 +430,7 @@ public class Controller {
 
     @FXML
     void addCronButtonAction(ActionEvent event) {
-        System.out.println("random " + random.ints(500, 5000)
+        LOGGER.log(Level.FINEST, "random " + random.ints(500, 5000)
                 .limit(1).findFirst().getAsInt());
         Cron addCron = cronUtils.getDefaultCron().getCron();
         addCron.setName("NewCron"
@@ -435,7 +441,9 @@ public class Controller {
         int lastIndexCronId = 0;
         if(lastIndex != -1)
             lastIndexCronId = cronLists.cronObservableList.get(lastIndex).getId();
-        System.out.println("lastIndexCronId " + lastIndexCronId);
+
+        LOGGER.log(Level.FINEST,"lastIndexCronId " + lastIndexCronId);
+
         addCron.setId(lastIndexCronId + 1);
         cronLists.cronObservableList.add(0, addCron);
         cronListView.setItems(cronLists.cronObservableList);
@@ -443,8 +451,6 @@ public class Controller {
 
         timezoneComboBox.setItems(zoneLists);
         timezoneComboBox.getSelectionModel().select("Australia/Sydney (UTC+11:00)");
-
-
         event.consume();
     }
 
@@ -457,7 +463,6 @@ public class Controller {
     @FXML
     void cronSaveAction(ActionEvent event) {
         if(! cronStatusButton.isSelected()) {
-            System.out.println("disabled");
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setHeaderText("Cron is not enabled");
             alert.showAndWait();
@@ -493,22 +498,34 @@ public class Controller {
             cronUtils.tidyArgumentList(argumentComboBox);
             CronUtils.selectedCron.setParameter(argumentComboBox.getItems());
 
-            if ((cronStartDate.getValue() != null))
-                CronUtils.selectedCron.setStartDate(cronStartDate.getValue().toString());
+            //save cron's timezone
+            String cronTimeZone = timezoneComboBox.getSelectionModel().getSelectedItem();
+            CronUtils.selectedCron.setTimeZone(cronTimeZone);
+            ZoneId cronZoneId = cronUtils.getCronZoneId(cronTimeZone);
+
+            if ((cronStartDate.getValue() != null)) {
+                ZonedDateTime cronZonedStartDate = cronStartDate.getValue().atStartOfDay(cronZoneId);
+                CronUtils.selectedCron.setStartDate(cronZonedStartDate.toString());
+            }
             else CronUtils.selectedCron.setStartDate("");
-            if(cronEndDate.getValue() !=null)
-                CronUtils.selectedCron.setEndDate(cronEndDate.getValue().toString());
+
+            if(cronEndDate.getValue() !=null) {
+                ZonedDateTime cronZonedEndDate = cronEndDate.getValue().atStartOfDay(cronZoneId);
+                CronUtils.selectedCron.setEndDate(cronZonedEndDate.toString());
+            }
             else CronUtils.selectedCron.setEndDate("");
+
             if(cronStartTime.getValue() !=null)
                 CronUtils.selectedCron.setStartTime(cronStartTime.getValue().toString());
             else CronUtils.selectedCron.setStartTime("");
+
             if(cronEndTime.getValue() !=null)
                 CronUtils.selectedCron.setEndTime(cronEndTime.getValue().toString());
             else CronUtils.selectedCron.setEndTime("");
-            //save cron's timezone
-            CronUtils.selectedCron.setTimeZone(timezoneComboBox.getSelectionModel().getSelectedItem());
 
-            System.out.println("onSave " + CronUtils.selectedCron);
+
+            LOGGER.log(Level.FINEST,"onSave " + CronUtils.selectedCron);
+            LOGGER.log(Level.INFO,"saved " + CronUtils.selectedCron);
             cronUtils.writeCronToDB(CronUtils.selectedCron);
 
             Notifications.create()
@@ -532,7 +549,7 @@ public class Controller {
         Optional<ButtonType> result = alert.showAndWait();
         if (result.isPresent() && result.get() == ButtonType.OK){
             // ... user chose OK
-            System.out.println(result.get());
+//            System.out.println(result.get());
             cronDeleteButton.setDisable(false);
 
             cronUtils.deleteCronFromDB(CronUtils.selectedCron);
@@ -541,7 +558,7 @@ public class Controller {
 
         } else {
             // ... user chose CANCEL or closed the dialog
-            System.out.println(result.get());
+//            System.out.println(result.get());
             cronDeleteButton.setDisable(false);
         }
         event.consume();
@@ -617,7 +634,7 @@ public class Controller {
                             jfxCheckBox.setSelected(true);
                     });
         } catch (Exception e) {
-            System.out.println("ignoring second action event");
+            LOGGER.log(Level.FINEST, "ignoring second action event");
         }
         event.consume();
     }
@@ -639,7 +656,7 @@ public class Controller {
                             jfxCheckBox.setSelected(true);
                     });
         } catch (Exception e) {
-            System.out.println("ignoring second action event");
+            LOGGER.log(Level.FINEST,"ignoring second action event");
         }
         event.consume();
     }
@@ -648,9 +665,9 @@ public class Controller {
     void addScriptButtonAction(ActionEvent event) {
 
         final FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("View Pictures");
+        fileChooser.setTitle("Choose Script");
         fileChooser.setInitialDirectory(
-                new File("/Users/ezmoses/Downloads")
+                new File(SystemUtils.USER_DIR)
         );
         List<String> powershellList = new ArrayList<>();
         powershellList.add("*.ps1");
@@ -663,10 +680,10 @@ public class Controller {
         fileChooser.getExtensionFilters().addAll(
 //                new FileChooser.ExtensionFilter("All Images", "*.*"),
                 new FileChooser.ExtensionFilter("powershell", powershellList),
-                new FileChooser.ExtensionFilter("batch", batchList),
-                new FileChooser.ExtensionFilter("PNG", "*.png")
+                new FileChooser.ExtensionFilter("batch", batchList)
+//                new FileChooser.ExtensionFilter("PNG", "*.png")
         );
-        fileChooser.setSelectedExtensionFilter(fileChooser.getExtensionFilters().get(2));
+        fileChooser.setSelectedExtensionFilter(fileChooser.getExtensionFilters().get(1));
         final File scriptFile = fileChooser.showOpenDialog(rootPane.getScene().getWindow());
         try {
             scriptNameText.setText(scriptFile.getPath());
@@ -684,7 +701,7 @@ public class Controller {
             argumentComboBox.setVisible(true);
 
         } catch (NullPointerException npe) {
-            System.out.println(" ba ba boo ba");
+            LOGGER.log(Level.FINEST," ___NPE___");
         }
 
         event.consume();
@@ -705,7 +722,7 @@ public class Controller {
 
 
         } catch (NullPointerException npe) {
-            System.out.println("npe");
+            LOGGER.log(Level.FINEST,"___NPE___");
         }
         event.consume();
     }
@@ -721,11 +738,6 @@ public class Controller {
                 .position(Pos.CENTER)
                 .darkStyle()
                 .showInformation();
-    }
-
-    @FXML
-    void timezoneComboBoxAction(ActionEvent event) {
-
     }
 
     @FXML // This method is called by the FXMLLoader when initialization is complete
@@ -752,7 +764,6 @@ public class Controller {
 
         // Set default Cron
         cronListView.setItems(cronLists.cronObservableList.sorted());
-//        System.out.println("cronListView : " + cronListView.getItems());
         cronListView.setCellFactory(cronListView -> new CronListViewCell());
 
         cronListView.getSelectionModel().selectedItemProperty()
@@ -760,11 +771,14 @@ public class Controller {
 
                     if (newValue != null) {
                         cronLists = new CronLists();
-                        CronUtils.selectedCron = cronLists.getCronById(newValue.getId()); //newValue;
-//                        System.out.println("newValue " + CronUtils.selectedCron.getStatus());
+                        CronUtils.selectedCron = cronLists.getCronById(newValue.getId());
+                        if(CronUtils.selectedCron == null)
+                            CronUtils.selectedCron = newValue;
+
                         cStatus = new SimpleBooleanProperty(CronUtils.selectedCron.getStatus()
                                 .equalsIgnoreCase(CronConstants.CRON_ENABLED));
-                        System.out.println("cStatus " + cStatus);
+                        LOGGER.log(Level.FINEST, "selected cron status:  " + cStatus);
+
                         if (cStatus.getValue())
                             cronStatusButton.setSelected(true);
                         else
@@ -801,36 +815,37 @@ public class Controller {
                             argumentComboBox.setItems(null);
                             scriptNameText.setText(null);
 
-                            scriptNameText.setText(CronUtils.selectedCron.getScript());
-                            System.out.println("---- " + CronUtils.selectedCron.getParameter());
-
+                            LOGGER.log(Level.FINEST,"selected cron parameter: "
+                                    + CronUtils.selectedCron.getParameter());
                             argumentComboBox.setItems(FXCollections.observableArrayList(
                                         CronUtils.selectedCron.getParameter()));
-
                             cronUtils.tidyArgumentList(argumentComboBox);
                         }
+                        scriptNameText.setText(CronUtils.selectedCron.getScript());
 
-                        // Setup selected cron's time
-                        LocalDate startDate = (! CronUtils.selectedCron.getStartDate().isEmpty()) ?
-                                (LocalDate.parse(CronUtils.selectedCron.getStartDate(), DateTimeFormatter.ISO_LOCAL_DATE))
-                                : LocalDate.now();
-                        LocalDate endDate = (! CronUtils.selectedCron.getEndDate().isEmpty()) ?
-                                (LocalDate.parse(CronUtils.selectedCron.getEndDate(), DateTimeFormatter.ISO_LOCAL_DATE))
-                                : null;
-                        LocalTime startTime = (! CronUtils.selectedCron.getStartTime().isEmpty()) ?
-                                (LocalTime.parse(CronUtils.selectedCron.getStartTime(), DateTimeFormatter.ISO_LOCAL_TIME))
-                                : LocalTime.now();
-                        LocalTime endTime = (! CronUtils.selectedCron.getEndTime().isEmpty()) ?
-                                (LocalTime.parse(CronUtils.selectedCron.getEndTime(), DateTimeFormatter.ISO_LOCAL_TIME))
-                                : null;
-                        cronStartDate.setValue(startDate);
-                        cronEndDate.setValue(endDate);
-                        cronStartTime.setValue(startTime);
-                        cronEndTime.setValue(endTime);
 
                         //Setup selected cron's timezone
                         timezoneComboBox.setItems(zoneLists);
                         timezoneComboBox.getSelectionModel().select(CronUtils.selectedCron.getTimeZone());
+
+                        // Setup selected cron's time
+                        ZonedDateTime startDate = (! CronUtils.selectedCron.getStartDate().isEmpty()) ?
+                                ZonedDateTime.parse(CronUtils.selectedCron.getStartDate()) : ZonedDateTime.now();
+                        cronStartDate.setValue(startDate.toLocalDate());
+
+                        ZonedDateTime endDate = (! CronUtils.selectedCron.getEndDate().isEmpty()) ?
+                                ZonedDateTime.parse(CronUtils.selectedCron.getEndDate()) : null;
+                        if(endDate != null)
+                            cronEndDate.setValue(endDate.toLocalDate());
+
+                        LocalTime startTime = (! CronUtils.selectedCron.getStartTime().isEmpty()) ?
+                                LocalTime.parse(CronUtils.selectedCron.getStartTime(), DateTimeFormatter.ISO_TIME) : LocalTime.now();
+                        cronStartTime.setValue(startTime);
+
+                        LocalTime endTime = (! CronUtils.selectedCron.getEndTime().isEmpty()) ?
+                                LocalTime.parse(CronUtils.selectedCron.getEndTime(), DateTimeFormatter.ISO_TIME) : null;
+                        if(endTime != null)
+                            cronEndTime.setValue(endTime);
                     }
                 });
         cronListView.getSelectionModel().selectFirst();

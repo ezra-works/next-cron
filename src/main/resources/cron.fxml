@@ -1052,28 +1052,32 @@
                                        <children>
                                           <Group layoutX="7.0" layoutY="21.0">
                                              <children>
-                                                <ComboBox fx:id="argumentComboBox" editable="true" layoutX="138.0" layoutY="71.0" onAction="#argumentComboBoxAction" prefHeight="31.0" prefWidth="149.0" promptText="Enter Arguments" />
-                                                <JFXButton fx:id="argumentDeleteButton" alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" layoutX="15.0" layoutY="69.0" onAction="#argumentDeleteButtonAction" prefHeight="35.0" prefWidth="107.0" styleClass="primary-background" stylesheets="@style/style.css" text="Delete Args" />
+                                                <ComboBox fx:id="argumentComboBox" editable="true" layoutX="138.0" layoutY="88.0" onAction="#argumentComboBoxAction" prefHeight="31.0" prefWidth="149.0" promptText="Enter Arguments" />
+                                                <JFXButton fx:id="argumentDeleteButton" alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" layoutX="15.0" layoutY="86.0" onAction="#argumentDeleteButtonAction" prefHeight="35.0" prefWidth="107.0" styleClass="primary-background" stylesheets="@style/style.css" text="Delete Args" />
                                                 <JFXButton fx:id="addScriptButton" alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" layoutX="17.0" layoutY="17.0" onAction="#addScriptButtonAction" prefHeight="35.0" prefWidth="103.0" styleClass="primary-background" stylesheets="@style/style.css" text="Add Script" />
                                                 <Text fx:id="scriptNameText" disable="true" layoutX="138.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="FileName ..." underline="true" wrappingWidth="361.21875" />
                                                 <Separator layoutX="7.0" prefHeight="17.0" prefWidth="541.0" />
-                                                <Separator layoutX="7.0" layoutY="52.0" prefHeight="17.0" prefWidth="541.0" />
-                                                <Separator layoutX="7.0" layoutY="104.0" prefHeight="17.0" prefWidth="541.0" />
+                                                <Separator layoutX="7.0" layoutY="64.0" prefHeight="17.0" prefWidth="541.0" />
+                                                <Separator layoutX="7.0" layoutY="123.0" prefHeight="17.0" prefWidth="541.0" />
                                              </children>
                                           </Group>
-                                          <Separator layoutX="21.0" layoutY="173.0" prefHeight="17.0" prefWidth="534.0" />
-                                          <Separator layoutX="18.0" layoutY="368.0" prefHeight="17.0" prefWidth="540.0" />
-                                          <JFXDatePicker fx:id="cronStartDate" layoutX="106.0" layoutY="192.0" maxHeight="30.0" maxWidth="120.0" minHeight="30.0" minWidth="120.0" prefHeight="30.0" prefWidth="120.0" />
-                                          <JFXDatePicker fx:id="cronEndDate" defaultColor="#8f0054" layoutX="364.0" layoutY="192.0" maxHeight="30.0" maxWidth="120.0" minHeight="30.0" minWidth="120.0" prefHeight="30.0" prefWidth="120.0" />
-                                          <Label layoutX="21.0" layoutY="199.0" text="Start Date:" textFill="#009688" />
-                                          <Label layoutX="291.0" layoutY="199.0" text="End Date:" textFill="#8f0054" />
-                                          <ComboBox fx:id="timezoneComboBox" layoutX="106.0" layoutY="322.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#timezoneComboBoxAction" prefHeight="28.0" prefWidth="168.0" promptText="Select a timezone" />
-                                          <JFXTimePicker fx:id="cronStartTime" editable="true" layoutX="106.0" layoutY="254.0" maxHeight="30.0" maxWidth="120.0" minHeight="30.0" minWidth="120.0" prefHeight="30.0" prefWidth="120.0" />
-                                          <Label layoutX="21.0" layoutY="269.0" text="Start Time:" textFill="#009688" />
-                                          <JFXTimePicker fx:id="cronEndTime" defaultColor="#8f0054" editable="true" layoutX="364.0" layoutY="254.0" maxHeight="30.0" maxWidth="120.0" minHeight="30.0" minWidth="120.0" prefHeight="30.0" prefWidth="120.0" />
-                                          <Label layoutX="290.0" layoutY="269.0" text="End Time:" textFill="#8f0054" />
-                                          <Separator layoutX="268.0" layoutY="186.0" orientation="VERTICAL" prefHeight="100.0" prefWidth="0.0" />
-                                          <Label layoutX="21.0" layoutY="329.0" text="Timezone:" />
+                                          <Group layoutX="22.0" layoutY="196.0">
+                                             <children>
+                                                <Separator layoutX="3.0" prefHeight="17.0" prefWidth="534.0" />
+                                                <Separator layoutY="195.0" prefHeight="17.0" prefWidth="540.0" />
+                                                <JFXDatePicker fx:id="cronStartDate" layoutX="88.0" layoutY="19.0" maxHeight="30.0" maxWidth="120.0" minHeight="30.0" minWidth="120.0" prefHeight="30.0" prefWidth="120.0" />
+                                                <JFXDatePicker fx:id="cronEndDate" defaultColor="#8f0054" layoutX="346.0" layoutY="19.0" maxHeight="30.0" maxWidth="120.0" minHeight="30.0" minWidth="120.0" prefHeight="30.0" prefWidth="120.0" />
+                                                <Label layoutX="3.0" layoutY="26.0" text="Start Date:" textFill="#009688" />
+                                                <Label layoutX="273.0" layoutY="26.0" text="End Date:" textFill="#8f0054" />
+                                                <ComboBox fx:id="timezoneComboBox" layoutX="88.0" layoutY="149.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="28.0" prefWidth="168.0" promptText="Select a timezone" />
+                                                <JFXTimePicker fx:id="cronStartTime" editable="true" layoutX="88.0" layoutY="81.0" maxHeight="30.0" maxWidth="120.0" minHeight="30.0" minWidth="120.0" prefHeight="30.0" prefWidth="120.0" />
+                                                <Label layoutX="3.0" layoutY="96.0" text="Start Time:" textFill="#009688" />
+                                                <JFXTimePicker fx:id="cronEndTime" defaultColor="#8f0054" editable="true" layoutX="346.0" layoutY="81.0" maxHeight="30.0" maxWidth="120.0" minHeight="30.0" minWidth="120.0" prefHeight="30.0" prefWidth="120.0" />
+                                                <Label layoutX="272.0" layoutY="96.0" text="End Time:" textFill="#8f0054" />
+                                                <Separator layoutX="250.0" layoutY="13.0" orientation="VERTICAL" prefHeight="100.0" prefWidth="0.0" />
+                                                <Label layoutX="3.0" layoutY="156.0" text="Timezone:" />
+                                             </children>
+                                          </Group>
                                        </children>
                                     </AnchorPane>
                                  </content>

@@ -11,18 +11,20 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class CronLists {
 
+    private static final Logger LOGGER = Logger.getLogger(CronLists.class.getName());
     ObservableList<Cron> cronObservableList = FXCollections.observableArrayList();
 
     public CronLists() { setCronList(CronUtils.getCronFileList()); }
 
     private ObservableList<Cron> setCronList(List<File> files) {
         Gson gson;
-        DefaultCron defaultCron = null;
+        DefaultCron defaultCron;
 
-//        System.out.println(files.get(0).getName());
         for (File file : files) {
             gson = new Gson();
             defaultCron = new DefaultCron();
@@ -37,22 +39,27 @@ public class CronLists {
             cronObservableList.add(defaultCron.getCron());
         }
 
-        if(files.size() == 0) {
-            gson = new Gson();
-            defaultCron = new DefaultCron();
+        if(files.size() == 0)
+            cronObservableList.add(0, getDefaultCron());
 
-            try {
-                defaultCron = gson.fromJson(
-                        IOUtils.toString(getClass().getResourceAsStream("/json/sample_cron.json")
-                                , Charset.defaultCharset())
-                        ,   DefaultCron.class);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            cronObservableList.add(0, defaultCron.getCron());
-        }
-        System.out.println("cronObservableList " + cronObservableList.sorted());
+        LOGGER.log(Level.FINEST,"cronObservableList: " + cronObservableList.sorted());
+        LOGGER.log(Level.INFO, "Total crons: " + cronObservableList.size());
         return cronObservableList;
+    }
+
+    private Cron getDefaultCron() {
+        Gson gson = new Gson();
+        DefaultCron defaultCron = new DefaultCron();
+
+        try {
+            defaultCron = gson.fromJson(
+                    IOUtils.toString(getClass().getResourceAsStream("/json/sample_cron.json")
+                            , Charset.defaultCharset())
+                    ,   DefaultCron.class);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return defaultCron.getCron();
     }
 
     public Cron getCronById(int cronId) {

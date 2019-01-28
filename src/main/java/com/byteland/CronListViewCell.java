@@ -11,8 +11,12 @@ import javafx.scene.control.ListCell;
 import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class CronListViewCell extends ListCell<Cron> {
+
+    private static final Logger LOGGER = Logger.getLogger(CronListViewCell.class.getName());
 
     @FXML
     private AnchorPane cronAnchorPane;
@@ -27,7 +31,7 @@ public class CronListViewCell extends ListCell<Cron> {
     @FXML
     void cronTextFieldAction(ActionEvent event) {
         CronUtils.selectedCron.setName(cronTextField.getText());
-        System.out.println("cronTextFieldAction " + CronUtils.selectedCron);
+        LOGGER.log(Level.INFO, "cron name renamed as " + CronUtils.selectedCron.getName());
         event.consume();
     }
 
@@ -36,9 +40,8 @@ public class CronListViewCell extends ListCell<Cron> {
 
     @Override
     protected void updateItem(Cron cron, boolean empty) {
-//        System.out.println("Cron set " + cron);
+
         super.updateItem(cron, empty);
-//        System.out.println("Cron set2 " + cron);
 
         if(empty || cron == null) {
 
@@ -54,7 +57,7 @@ public class CronListViewCell extends ListCell<Cron> {
                 try {
                     mLLoader.load();
                 } catch (IOException e) {
-                    System.out.println("cannot load cronListCell.fxml" + e);
+                    LOGGER.log(Level.FINEST,"cannot load cronListCell.fxml" + e.getMessage());
                 }
             }
             cronTextField.setText(String.valueOf(cron.getName()));

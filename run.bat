@@ -1,2 +1,2 @@
 
-java.exe -classpath ./next-cron.jar:. com.byteland.CronExecute
+java.exe -classpath "next-cron.jar";. com.byteland.CronExecute
