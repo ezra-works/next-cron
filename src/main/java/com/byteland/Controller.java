@@ -21,6 +21,7 @@ import org.apache.commons.lang.SystemUtils;
 import org.controlsfx.control.Notifications;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.time.LocalTime;
 import java.time.ZoneId;
@@ -28,11 +29,22 @@ import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.logging.Level;
+import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
 public class Controller {
 
-    private static final Logger LOGGER = Logger.getLogger(Controller.class.getName());
+    private static final LogManager logManager = LogManager.getLogManager();
+    private static final Logger LOGGER = Logger.getLogger("confLogger");
+
+    static {
+        try {
+            logManager.readConfiguration(Main.class.getResourceAsStream("/conf/logger.properties"));
+            LOGGER.log(Level.INFO, "init called");
+        } catch (IOException exception) {
+            LOGGER.log(Level.SEVERE, "Error in loading configuration",exception);
+        }
+    }
 
     @FXML // ResourceBundle that was given to the FXMLLoader
     private ResourceBundle resources;
@@ -507,7 +519,7 @@ public class Controller {
                 ZonedDateTime cronZonedStartDate = cronStartDate.getValue().atStartOfDay(cronZoneId);
                 CronUtils.selectedCron.setStartDate(cronZonedStartDate.toString());
             }
-            else CronUtils.selectedCron.setStartDate("");
+            else CronUtils.selectedCron.setStartDate(ZonedDateTime.now().toString());
 
             if(cronEndDate.getValue() !=null) {
                 ZonedDateTime cronZonedEndDate = cronEndDate.getValue().atStartOfDay(cronZoneId);
@@ -517,7 +529,7 @@ public class Controller {
 
             if(cronStartTime.getValue() !=null)
                 CronUtils.selectedCron.setStartTime(cronStartTime.getValue().toString());
-            else CronUtils.selectedCron.setStartTime("");
+            else CronUtils.selectedCron.setStartTime(ZonedDateTime.now().toLocalTime().toString());
 
             if(cronEndTime.getValue() !=null)
                 CronUtils.selectedCron.setEndTime(cronEndTime.getValue().toString());
@@ -676,12 +688,16 @@ public class Controller {
         batchList.add("*.bat");
         batchList.add("*.cmd");
         batchList.add("*.btm");
+        List<String> shellList = new ArrayList<>();
+        shellList.add("*.sh");
+        shellList.add("*.bash");
+        shellList.add("*.ksh");
 
         fileChooser.getExtensionFilters().addAll(
 //                new FileChooser.ExtensionFilter("All Images", "*.*"),
-                new FileChooser.ExtensionFilter("powershell", powershellList),
-                new FileChooser.ExtensionFilter("batch", batchList)
-//                new FileChooser.ExtensionFilter("PNG", "*.png")
+                new FileChooser.ExtensionFilter("Powershell Scripts", powershellList),
+                new FileChooser.ExtensionFilter("Batch Scripts", batchList),
+                new FileChooser.ExtensionFilter("Shell Scripts", shellList)
         );
         fileChooser.setSelectedExtensionFilter(fileChooser.getExtensionFilters().get(1));
         final File scriptFile = fileChooser.showOpenDialog(rootPane.getScene().getWindow());

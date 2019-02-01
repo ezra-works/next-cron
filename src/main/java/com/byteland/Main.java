@@ -7,16 +7,7 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.LogManager;
-import java.util.logging.Logger;
-
 public class Main extends Application {
-
-    private static final LogManager logManager = LogManager.getLogManager();
-    private static final Logger LOGGER = Logger.getLogger("confLogger");
 
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -35,11 +26,6 @@ public class Main extends Application {
 
 
     public static void main(String[] args) {
-        try {
-            logManager.readConfiguration(Main.class.getResourceAsStream("/conf/logger.properties"));
-        } catch (IOException exception) {
-            LOGGER.log(Level.SEVERE, "Error in loading configuration",exception);
-        }
         launch(args);
     }
 }

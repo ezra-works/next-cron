@@ -33,14 +33,14 @@ import java.util.stream.Stream;
 public class CronUtils {
 
     private static final Logger LOGGER = Logger.getLogger(CronUtils.class.getName());
-    public static Cron selectedCron;
+    static Cron selectedCron;
 
     public CronUtils(Boolean bool) {
         if(bool)
             setupFolders();
     }
 
-    public static List<File> getCronFileList() {
+    static List<File> getCronFileList() {
         try (Stream<Path> paths = Files.walk(Paths.get(CronConstants.DATA_PATH))) {
             return paths
                     .filter(Files::isRegularFile)
@@ -53,7 +53,7 @@ public class CronUtils {
         }
     }
 
-    public DefaultCron getDefaultCron() {
+    DefaultCron getDefaultCron() {
         Gson gson = new Gson();
         DefaultCron defaultCron = new DefaultCron();
 
@@ -68,10 +68,10 @@ public class CronUtils {
         return defaultCron;
     }
 
-    public void writeCronToDB(Cron cron) {
+    void writeCronToDB(Cron cron) {
         AtomicBoolean isMatched = new AtomicBoolean(false);
-        AtomicReference<File> wfile = new AtomicReference<File>();
-        getCronFileList().forEach(file -> {
+        AtomicReference<File> wfile = new AtomicReference<>();
+        Objects.requireNonNull(getCronFileList()).forEach(file -> {
             String baseName = FilenameUtils.getBaseName(file.getName());
             if(Integer.parseInt(baseName) == cron.getId()) {
                 isMatched.set(true);
@@ -101,8 +101,8 @@ public class CronUtils {
         }
     }
 
-    public void deleteCronFromDB(Cron cron) {
-        getCronFileList().forEach(file -> {
+    void deleteCronFromDB(Cron cron) {
+        Objects.requireNonNull(getCronFileList()).forEach(file -> {
             String baseName = FilenameUtils.getBaseName(file.getName());
             if(Integer.parseInt(baseName) == cron.getId()) {
                 file.delete();
@@ -110,14 +110,14 @@ public class CronUtils {
         });
     }
 
-    public void tidyArgumentList(ComboBox<String> argumentComboBox) {
+    void tidyArgumentList(ComboBox<String> argumentComboBox) {
         argumentComboBox.getItems().removeIf(Objects::isNull);
         argumentComboBox.getItems().removeIf(s -> s.equalsIgnoreCase(CronConstants.ARGUEMENT_STG));
         LOGGER.log(Level.FINEST, "tidyArgumentList: " + argumentComboBox.getItems());
 //        return argumentComboBox.getItems();
     }
 
-    public ObservableList<String> getTimeZoneList() {
+    ObservableList<String> getTimeZoneList() {
         LocalDateTime localDateTime = LocalDateTime.now();
         // Allowed zone names
         Set<String> allowedTimeZoneNames = new HashSet<>();
@@ -127,15 +127,14 @@ public class CronUtils {
 
         final List<String> zoneLists = ZoneId.getAvailableZoneIds()
                 .stream()
-                .filter(zoneName -> allowedTimeZoneNames.contains(zoneName))
+                .filter(allowedTimeZoneNames::contains)
                 .map(ZoneId::of)
                 .map(zoneId -> {
-                    final String zones = String.format("%s (UTC%s)", zoneId.toString(),
+                    return String.format("%s (UTC%s)", zoneId.toString(),
                             localDateTime.atZone(zoneId)
                                     .getOffset()
                                     .getId()
                                     .replaceAll("Z", "+00:00"));
-                    return zones;
                 })
                 .sorted(String::compareTo)
                 .collect(Collectors.toList());
@@ -144,7 +143,7 @@ public class CronUtils {
         return zoneIds;
     }
 
-    public ZoneId getCronZoneId(String cronTimezone) {
+    ZoneId getCronZoneId(String cronTimezone) {
 //        ZonedDateTime.parse("2019-01-26T12:04:57.369+05:30[Asia/Calcutta]")
          String zone = cronTimezone.substring(0, cronTimezone.indexOf("(")).trim();
          return ZoneId.of(zone);

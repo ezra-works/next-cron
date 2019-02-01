@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.time.LocalTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.*;
@@ -20,8 +21,7 @@ public class CronExecute {
     private static final LogManager logManager = LogManager.getLogManager();
     private static final Logger LOGGER = Logger.getLogger("confLogger");
 
-    static List<Cron> executeList = new ArrayList<>();
-    static int initialCronsHash = 0;
+    private static List<Cron> executeList = new ArrayList<>();
 
     public static void main(String[] args) {
 
@@ -32,8 +32,8 @@ public class CronExecute {
         }
 
         ScheduledExecutorService builder = Executors.newScheduledThreadPool(1);
-        ScheduledFuture<?> handle= builder.scheduleWithFixedDelay(() ->
-                scanAndBuild(), (60 - LocalTime.now().getSecond()), 60, TimeUnit.SECONDS);
+        ScheduledFuture<?> handle= builder.scheduleWithFixedDelay(CronExecute::scanAndBuild
+                , (60 - LocalTime.now().getSecond()), 60, TimeUnit.SECONDS);
         try {
             handle.get();
         } catch (ExecutionException | InterruptedException e) {
@@ -48,15 +48,15 @@ public class CronExecute {
                 .forEach(cron -> {
                     ProcessBuilder builder = new ProcessBuilder();
                     if (cron.getScript().endsWith("bat")) {
-                        System.out.println("executing " + cron.getScript());
+                        LOGGER.log(Level.INFO,"executing " + cron.getScript());
                         builder.command("cmd.exe", "/c", cron.getScript());
                     }
                     else if(cron.getScript().endsWith("ps1")) {
-                        System.out.println("executing " + cron.getScript());
+                        LOGGER.log(Level.INFO,"executing " + cron.getScript());
                         builder.command("powershell.exe", "-Command", cron.getScript());
                     }
                     else if(cron.getScript().endsWith("sh")) {
-                        System.out.println("executing " + cron.getScript());
+                        LOGGER.log(Level.INFO, "executing " + cron.getScript());
                         builder.command(cron.getScript());
                     }
                     else {
@@ -116,25 +116,39 @@ public class CronExecute {
                         ZonedDateTime.parse(cron.getStartDate()).withZoneSameInstant(localZoneId)
                                 .getDayOfMonth() <= zonedDateTime.getDayOfMonth())
                 .filter(cron -> {
-                    if (cron.getEndDate().isEmpty())
+                    if (cron.getEndDate() == null || cron.getEndDate().isEmpty())
                         return true;
                     else
                         return ZonedDateTime.parse(cron.getEndDate()).withZoneSameInstant(localZoneId)
                                 .getYear() >= zonedDateTime.getYear();
                 })
                 .filter(cron -> {
-                    if (cron.getEndDate().isEmpty())
+                    if (cron.getEndDate() == null || cron.getEndDate().isEmpty())
                         return true;
                     else
                         return ZonedDateTime.parse(cron.getEndDate()).withZoneSameInstant(localZoneId)
                                 .getMonthValue() >= zonedDateTime.getMonthValue();
                 })
                 .filter(cron -> {
-                    if (cron.getEndDate().isEmpty())
+                    if (cron.getEndDate() == null || cron.getEndDate().isEmpty())
                         return true;
                     else
                         return ZonedDateTime.parse(cron.getEndDate()).withZoneSameInstant(localZoneId)
                                 .getDayOfMonth() >= zonedDateTime.getDayOfMonth();
+                })
+                .filter(cron -> {
+                    if (cron.getEndTime() == null || cron.getEndTime().isEmpty())
+                        return true;
+                    else {
+                        ZonedDateTime endTime = ZonedDateTime.of(zonedDateTime.toLocalDate()
+                                , LocalTime.parse(cron.getEndTime(), DateTimeFormatter.ISO_TIME)
+                                , localZoneId);
+//                        LOGGER.log(Level.INFO, "endTime " + endTime.getMinute() +
+//                                " zonedDateTime.getMinute() " + zonedDateTime.getMinute()
+//                                + " endTime.getMinute() >= zonedDateTime.getMinute()"
+//                                        + (endTime.getMinute() >= zonedDateTime.getMinute()));
+                        return endTime.getMinute() >= zonedDateTime.getMinute();
+                    }
                 })
                 .filter(cron -> cron.getMonths().getOn().contains(zonedDateTime.getMonth().toString()))
                 .filter(cron -> cron.getWeekdays().getOn().contains(zonedDateTime.getDayOfWeek().toString()))
@@ -150,5 +164,4 @@ public class CronExecute {
         } else
             LOGGER.log(Level.INFO, "no crons to execute");
     }
-
 }

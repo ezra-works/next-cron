@@ -1,8 +1,5 @@
 
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
+import java.time.*;
 import java.time.format.DateTimeFormatter;
 
 public class DateTest {
@@ -32,5 +29,9 @@ public class DateTest {
         System.out.println(localDate.atStartOfDay(ZoneId.of("Asia/Calcutta")));
 
         System.out.println(LocalTime.parse("12:04:57+05:30", DateTimeFormatter.ISO_TIME));
+        System.out.println(LocalTime.parse("22:03", DateTimeFormatter.ISO_TIME));
+        System.out.println(ZonedDateTime.of(zonedDateTime.toLocalDate(), zonedDateTime.toLocalTime(), localZoneId));
+        System.out.println(zonedDateTime.toLocalTime());
+
     }
 }

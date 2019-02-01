@@ -170,7 +170,7 @@
                                                       <Insets left="30.0" />
                                                    </GridPane.margin>
                                                 </JFXCheckBox>
-                                                <JFXCheckBox fx:id="febuaryCheckBox" accessibleText="month" text="Febuary" textFill="#358cc9" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                                <JFXCheckBox fx:id="februaryCheckBox" accessibleText="month" text="February" textFill="#358cc9" GridPane.columnIndex="1" GridPane.rowIndex="2">
                                                    <font>
                                                       <Font name="System Bold" size="15.0" />
                                                    </font>

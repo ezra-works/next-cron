@@ -21,7 +21,7 @@ public class CronLists {
 
     public CronLists() { setCronList(CronUtils.getCronFileList()); }
 
-    private ObservableList<Cron> setCronList(List<File> files) {
+    private void setCronList(List<File> files) {
         Gson gson;
         DefaultCron defaultCron;
 
@@ -44,7 +44,6 @@ public class CronLists {
 
         LOGGER.log(Level.FINEST,"cronObservableList: " + cronObservableList.sorted());
         LOGGER.log(Level.INFO, "Total crons: " + cronObservableList.size());
-        return cronObservableList;
     }
 
     private Cron getDefaultCron() {
@@ -62,7 +61,7 @@ public class CronLists {
         return defaultCron.getCron();
     }
 
-    public Cron getCronById(int cronId) {
+    Cron getCronById(int cronId) {
         return cronObservableList.stream()
                 .filter(cron -> cron.getId() == cronId)
                 .findFirst()

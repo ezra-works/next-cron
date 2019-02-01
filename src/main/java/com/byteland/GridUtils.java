@@ -6,39 +6,33 @@ import javafx.scene.layout.GridPane;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GridUtils {
+class GridUtils {
 
-    public void clearGridPaneChildren(GridPane gridPane) {
+    void clearGridPaneChildren(GridPane gridPane) {
         gridPane.getChildren()
                 .filtered(node -> node instanceof JFXCheckBox)
-                .forEach(node -> {
-                    ((JFXCheckBox) node).setSelected(false);
-                });
+                .forEach(node -> ((JFXCheckBox) node).setSelected(false));
     }
-    public void setCronHours(GridPane hoursGrid, int hour) {
+    void setCronHours(GridPane hoursGrid, int hour) {
         hoursGrid.getChildren()
                 .filtered(node -> node instanceof JFXCheckBox)
                 .filtered(node -> node.getId().contains("hour" + String.format("%02d", hour)))
-                .forEach(node -> {
-                    ((JFXCheckBox) node).setSelected(true);
-                });
+                .forEach(node -> ((JFXCheckBox) node).setSelected(true));
     }
-    public void setCronMinutes(GridPane minutesGrid, int minute) {
+    void setCronMinutes(GridPane minutesGrid, int minute) {
         minutesGrid.getChildren()
                 .filtered(node -> node instanceof JFXCheckBox)
                 .filtered(node -> node.getId().contains("minute" + String.format("%02d", minute)))
-                .forEach(node -> {
-                    ((JFXCheckBox) node).setSelected(true);
-                });
+                .forEach(node -> ((JFXCheckBox) node).setSelected(true));
     }
-    public void setCronWeeksMonth(GridPane gridPage, String wkMth) {
+    void setCronWeeksMonth(GridPane gridPage, String wkMth) {
         gridPage.getChildren()
                 .filtered(node -> node instanceof JFXCheckBox)
                 .filtered(node -> node.getId().contains(wkMth.toLowerCase()))
                 .forEach(node -> ((JFXCheckBox) node).setSelected(true));
     }
-    public List<Integer> getSelectedHoursMinutes(GridPane gridPage, String hrMin) {
-        List<Integer> selectList = new ArrayList<Integer>();
+    List<Integer> getSelectedHoursMinutes(GridPane gridPage, String hrMin) {
+        List<Integer> selectList = new ArrayList<>();
         gridPage.getChildren()
                 .filtered(node -> node instanceof JFXCheckBox)
                 .filtered(node -> node.getId().contains(hrMin))
@@ -50,8 +44,8 @@ public class GridUtils {
                 });
         return selectList;
     }
-    public List<String> getSelectedWeeksMonths(GridPane gridPage, String wkMon) {
-        List<String> selectList = new ArrayList<String>();
+    List<String> getSelectedWeeksMonths(GridPane gridPage, String wkMon) {
+        List<String> selectList = new ArrayList<>();
         gridPage.getChildren()
                 .filtered(node -> node instanceof JFXCheckBox)
                 .filtered(node -> node.getAccessibleText() != null)
