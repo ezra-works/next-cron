@@ -1069,7 +1069,7 @@
                                                 <JFXDatePicker fx:id="cronEndDate" defaultColor="#8f0054" layoutX="346.0" layoutY="19.0" maxHeight="30.0" maxWidth="120.0" minHeight="30.0" minWidth="120.0" prefHeight="30.0" prefWidth="120.0" />
                                                 <Label layoutX="3.0" layoutY="26.0" text="Start Date:" textFill="#009688" />
                                                 <Label layoutX="273.0" layoutY="26.0" text="End Date:" textFill="#8f0054" />
-                                                <ComboBox fx:id="timezoneComboBox" layoutX="88.0" layoutY="149.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="28.0" prefWidth="168.0" promptText="Select a timezone" />
+                                                <ComboBox fx:id="timezoneComboBox" layoutX="88.0" layoutY="149.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#timezoneComboBoxAction" prefHeight="28.0" prefWidth="168.0" promptText="Select a timezone" />
                                                 <JFXTimePicker fx:id="cronStartTime" editable="true" layoutX="88.0" layoutY="81.0" maxHeight="30.0" maxWidth="120.0" minHeight="30.0" minWidth="120.0" prefHeight="30.0" prefWidth="120.0" />
                                                 <Label layoutX="3.0" layoutY="96.0" text="Start Time:" textFill="#009688" />
                                                 <JFXTimePicker fx:id="cronEndTime" defaultColor="#8f0054" editable="true" layoutX="346.0" layoutY="81.0" maxHeight="30.0" maxWidth="120.0" minHeight="30.0" minWidth="120.0" prefHeight="30.0" prefWidth="120.0" />

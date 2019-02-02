@@ -19,6 +19,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.time.ZoneOffset;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
@@ -144,9 +145,15 @@ public class CronUtils {
     }
 
     ZoneId getCronZoneId(String cronTimezone) {
-//        ZonedDateTime.parse("2019-01-26T12:04:57.369+05:30[Asia/Calcutta]")
+//        "Asia/Calcutta (UTC+05:30)"
          String zone = cronTimezone.substring(0, cronTimezone.indexOf("(")).trim();
          return ZoneId.of(zone);
+    }
+
+    ZoneOffset getCronZoneOffset(String cronTimezone) {
+//        "Asia/Calcutta (UTC+05:30)"
+        String zoneOffset = cronTimezone.substring(cronTimezone.indexOf("+"), cronTimezone.indexOf(")")).trim();
+        return ZoneOffset.of(zoneOffset);
     }
 
     private void setupFolders() {

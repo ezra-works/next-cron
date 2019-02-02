@@ -1,6 +1,7 @@
 package com.byteland;
 
 import com.byteland.model.Cron;
+import org.apache.commons.lang.StringUtils;
 
 import java.io.File;
 import java.io.IOException;
@@ -91,69 +92,131 @@ public class CronExecute {
 
     private static void scanAndBuild() {
         final ZoneId localZoneId = ZoneId.systemDefault();
-        ZonedDateTime zonedDateTime = ZonedDateTime.now(localZoneId);
+        ZonedDateTime zonedLocalDateTime = ZonedDateTime.now(localZoneId);
 
-        LOGGER.log(Level.FINEST, "scanAndBuild " + zonedDateTime.getDayOfMonth()
-                + "," + zonedDateTime.getMonthValue()
-                + "," + zonedDateTime.getMonth()
-                + "," + zonedDateTime.getDayOfWeek()
-                + "," + zonedDateTime.getHour()
-                + "," + zonedDateTime.getMinute()
+        LOGGER.log(Level.FINEST, "scanAndBuild " + zonedLocalDateTime.getDayOfMonth()
+                + "," + zonedLocalDateTime.getMonthValue()
+                + "," + zonedLocalDateTime.getMonth()
+                + "," + zonedLocalDateTime.getDayOfWeek()
+                + "," + zonedLocalDateTime.getHour()
+                + "," + zonedLocalDateTime.getMinute()
                 + "," + localZoneId);
 
         CronLists cronLists = new CronLists();
-//        if(cronLists.cronObservableList.hashCode() != initialCronsHash) {
+        CronUtils cronUtils = new CronUtils(false);
 
         final List<Cron> collect = cronLists.cronObservableList.parallelStream()
                 .filter(cron -> cron.getStatus().equalsIgnoreCase(CronConstants.CRON_ENABLED))
                 .filter(cron ->
                         ZonedDateTime.parse(cron.getStartDate()).withZoneSameInstant(localZoneId)
-                                .getYear() <= zonedDateTime.getYear())
+                                .getYear() <= zonedLocalDateTime.getYear())
                 .filter(cron ->
                         ZonedDateTime.parse(cron.getStartDate()).withZoneSameInstant(localZoneId)
-                                .getMonthValue() <= zonedDateTime.getMonthValue())
+                                .getMonthValue() <= zonedLocalDateTime.getMonthValue())
                 .filter(cron ->
                         ZonedDateTime.parse(cron.getStartDate()).withZoneSameInstant(localZoneId)
-                                .getDayOfMonth() <= zonedDateTime.getDayOfMonth())
+                                .getDayOfMonth() <= zonedLocalDateTime.getDayOfMonth())
                 .filter(cron -> {
                     if (cron.getEndDate() == null || cron.getEndDate().isEmpty())
                         return true;
                     else
                         return ZonedDateTime.parse(cron.getEndDate()).withZoneSameInstant(localZoneId)
-                                .getYear() >= zonedDateTime.getYear();
+                                .getYear() >= zonedLocalDateTime.getYear();
                 })
                 .filter(cron -> {
                     if (cron.getEndDate() == null || cron.getEndDate().isEmpty())
                         return true;
                     else
                         return ZonedDateTime.parse(cron.getEndDate()).withZoneSameInstant(localZoneId)
-                                .getMonthValue() >= zonedDateTime.getMonthValue();
+                                .getMonthValue() >= zonedLocalDateTime.getMonthValue();
                 })
                 .filter(cron -> {
                     if (cron.getEndDate() == null || cron.getEndDate().isEmpty())
                         return true;
                     else
                         return ZonedDateTime.parse(cron.getEndDate()).withZoneSameInstant(localZoneId)
-                                .getDayOfMonth() >= zonedDateTime.getDayOfMonth();
+                                .getDayOfMonth() >= zonedLocalDateTime.getDayOfMonth();
+                })
+                .filter(cron -> {
+                    ZonedDateTime startDate = ZonedDateTime.parse(cron.getStartDate());
+                    ZonedDateTime startTime = ZonedDateTime
+                            .parse(startDate.toLocalDate() + "T" + cron.getStartTime())
+                            .withZoneSameInstant(localZoneId);
+
+                    LOGGER.log(Level.FINEST, "startTime " + startTime +
+                            " zonedLocalDateTime.getMinute() " + zonedLocalDateTime.getMinute()
+                            + " startTime.toEpochSecond() <= zonedLocalDateTime.toEpochSecond()"
+                            + (startTime.toEpochSecond() <= zonedLocalDateTime.toEpochSecond()));
+                    return startTime.toEpochSecond() <= zonedLocalDateTime.toEpochSecond();
                 })
                 .filter(cron -> {
                     if (cron.getEndTime() == null || cron.getEndTime().isEmpty())
                         return true;
                     else {
-                        ZonedDateTime endTime = ZonedDateTime.of(zonedDateTime.toLocalDate()
-                                , LocalTime.parse(cron.getEndTime(), DateTimeFormatter.ISO_TIME)
-                                , localZoneId);
-//                        LOGGER.log(Level.INFO, "endTime " + endTime.getMinute() +
-//                                " zonedDateTime.getMinute() " + zonedDateTime.getMinute()
-//                                + " endTime.getMinute() >= zonedDateTime.getMinute()"
-//                                        + (endTime.getMinute() >= zonedDateTime.getMinute()));
-                        return endTime.getMinute() >= zonedDateTime.getMinute();
+                        ZonedDateTime startDate = ZonedDateTime.parse(cron.getStartDate());
+                        ZonedDateTime endTime = ZonedDateTime
+                                .parse(startDate.toLocalDate() + "T" + cron.getEndTime())
+                                .withZoneSameInstant(localZoneId);
+
+                        LOGGER.log(Level.FINEST, "endTime " + endTime +
+                                " zonedLocalDateTime.getMinute() " + zonedLocalDateTime.getMinute()
+                                + " endTime.toEpochSecond() >= zonedLocalDateTime.toEpochSecond()"
+                                        + (endTime.toEpochSecond() >= zonedLocalDateTime.toEpochSecond()));
+                        return endTime.toEpochSecond() >= zonedLocalDateTime.toEpochSecond();
                     }
                 })
-                .filter(cron -> cron.getMonths().getOn().contains(zonedDateTime.getMonth().toString()))
-                .filter(cron -> cron.getWeekdays().getOn().contains(zonedDateTime.getDayOfWeek().toString()))
-                .filter(cron -> cron.getHours().getOn().contains(zonedDateTime.getHour()))
-                .filter(cron -> cron.getMinutes().getOn().contains(zonedDateTime.getMinute()))
+                .filter(cron -> cron.getMonths().getOn().contains(zonedLocalDateTime.getMonth().toString()))
+                .filter(cron -> cron.getWeekdays().getOn().contains(zonedLocalDateTime.getDayOfWeek().toString()))
+//                .filter(cron -> cron.getHours().getOn().contains(zonedLocalDateTime.getHour()))
+//                .filter(cron -> cron.getMinutes().getOn().contains(zonedLocalDateTime.getMinute()))
+                .filter(cron -> {
+                    boolean retVal = false;
+                    for (int hour : cron.getHours().getOn()) {
+
+                        ZoneId cronZoneId = cronUtils.getCronZoneId(cron.getTimeZone());
+                        ZonedDateTime cronLocalTime = ZonedDateTime.now(cronZoneId);
+                        String llHr = StringUtils.leftPad(Integer.toString(hour), 2, "0");
+                        String llMin = StringUtils.leftPad(Integer.toString(cronLocalTime.getMinute())
+                                , 2, "0");
+
+                        ZonedDateTime zonedHour = ZonedDateTime.of(cronLocalTime.toLocalDate()
+                                , LocalTime.parse(llHr + ":" + llMin, DateTimeFormatter.ISO_TIME)
+                                , cronZoneId)
+                                .withZoneSameInstant(localZoneId);
+
+                        if (zonedHour.getHour() == zonedLocalDateTime.getHour()) {
+                            LOGGER.log(Level.FINEST, "zonedHour: " + zonedHour
+                                    + " zonedLocalDateTime.getHour(): " + zonedLocalDateTime.getHour());
+                            retVal = true;
+                            break;
+                        }
+                    }
+                    return retVal;
+                })
+                .filter(cron -> {
+                    boolean retVal = false;
+                    for (int minute : cron.getMinutes().getOn()) {
+                        ZoneId cronZoneId = cronUtils.getCronZoneId(cron.getTimeZone());
+                        ZonedDateTime cronLocalTime = ZonedDateTime.now(cronZoneId);
+                        String llHr = StringUtils.leftPad(Integer.toString(cronLocalTime.getHour())
+                                , 2, "0");
+                        String llMin = StringUtils.leftPad(Integer.toString(minute)
+                                , 2, "0");
+
+                        ZonedDateTime zonedMin = ZonedDateTime.of(cronLocalTime.toLocalDate()
+                                , LocalTime.parse(llHr + ":" + llMin, DateTimeFormatter.ISO_TIME)
+                                , cronZoneId)
+                                .withZoneSameInstant(localZoneId);
+
+                        if (zonedMin.getMinute() == zonedLocalDateTime.getMinute()) {
+                            LOGGER.log(Level.FINEST, "zonedMin: " + zonedMin
+                                    + " zonedLocalDateTime.getMinute(): " + zonedLocalDateTime.getMinute());
+                            retVal = true;
+                            break;
+                        }
+                    }
+                    return retVal;
+                })
                 .collect(Collectors.toList());
 
         executeList.clear();

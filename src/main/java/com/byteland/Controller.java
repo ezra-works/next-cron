@@ -25,6 +25,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.time.LocalTime;
 import java.time.ZoneId;
+import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
@@ -514,6 +515,7 @@ public class Controller {
             String cronTimeZone = timezoneComboBox.getSelectionModel().getSelectedItem();
             CronUtils.selectedCron.setTimeZone(cronTimeZone);
             ZoneId cronZoneId = cronUtils.getCronZoneId(cronTimeZone);
+            ZoneOffset cronZoneOffSet = cronUtils.getCronZoneOffset(cronTimeZone);
 
             if ((cronStartDate.getValue() != null)) {
                 ZonedDateTime cronZonedStartDate = cronStartDate.getValue().atStartOfDay(cronZoneId);
@@ -528,11 +530,14 @@ public class Controller {
             else CronUtils.selectedCron.setEndDate("");
 
             if(cronStartTime.getValue() !=null)
-                CronUtils.selectedCron.setStartTime(cronStartTime.getValue().toString());
-            else CronUtils.selectedCron.setStartTime(ZonedDateTime.now().toLocalTime().toString());
+                CronUtils.selectedCron.setStartTime(cronStartTime.getValue()
+                        .atOffset(cronZoneOffSet).format(DateTimeFormatter.ISO_OFFSET_TIME));
+            else CronUtils.selectedCron.setStartTime(ZonedDateTime.now().toLocalTime()
+                    .format(DateTimeFormatter.ISO_OFFSET_TIME));
 
             if(cronEndTime.getValue() !=null)
-                CronUtils.selectedCron.setEndTime(cronEndTime.getValue().toString());
+                CronUtils.selectedCron.setEndTime(cronEndTime.getValue()
+                        .atOffset(cronZoneOffSet).format(DateTimeFormatter.ISO_OFFSET_TIME));
             else CronUtils.selectedCron.setEndTime("");
 
 
@@ -756,6 +761,14 @@ public class Controller {
                 .showInformation();
     }
 
+    @FXML
+    void timezoneComboBoxAction(ActionEvent event) {
+        String selectedTimeZone = timezoneComboBox.getSelectionModel().getSelectedItem();
+        ZoneId cronZoneId = cronUtils.getCronZoneId(selectedTimeZone);
+        cronStartDate.setValue(ZonedDateTime.now(cronZoneId).toLocalDate());
+        cronStartTime.setValue(ZonedDateTime.now(cronZoneId).toLocalTime());
+    }
+
     @FXML // This method is called by the FXMLLoader when initialization is complete
     void initialize() {
 
@@ -855,11 +868,13 @@ public class Controller {
                             cronEndDate.setValue(endDate.toLocalDate());
 
                         LocalTime startTime = (! CronUtils.selectedCron.getStartTime().isEmpty()) ?
-                                LocalTime.parse(CronUtils.selectedCron.getStartTime(), DateTimeFormatter.ISO_TIME) : LocalTime.now();
+                                LocalTime.parse(CronUtils.selectedCron.getStartTime()
+                                        , DateTimeFormatter.ISO_OFFSET_TIME) : LocalTime.now();
                         cronStartTime.setValue(startTime);
 
                         LocalTime endTime = (! CronUtils.selectedCron.getEndTime().isEmpty()) ?
-                                LocalTime.parse(CronUtils.selectedCron.getEndTime(), DateTimeFormatter.ISO_TIME) : null;
+                                LocalTime.parse(CronUtils.selectedCron.getEndTime()
+                                        , DateTimeFormatter.ISO_OFFSET_TIME) : null;
                         if(endTime != null)
                             cronEndTime.setValue(endTime);
                     }

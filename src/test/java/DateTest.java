@@ -1,4 +1,6 @@
 
+import org.apache.commons.lang.StringUtils;
+
 import java.time.*;
 import java.time.format.DateTimeFormatter;
 
@@ -17,6 +19,10 @@ public class DateTest {
         System.out.println(zonedDateTime);
 
         System.out.println("indiaDateTime " + indiaDateTime);
+        System.out.println("indiaDateTime to AST " + indiaDateTime.withZoneSameInstant(
+                ZoneId.of("Australia/Sydney")));
+        System.out.println("india->AST->india " + indiaDateTime.withZoneSameInstant(
+                ZoneId.of("Australia/Sydney")).withZoneSameInstant(ZoneId.of("Asia/Calcutta")));
         System.out.println("utcDateTime " + utcDateTime);
 
         System.out.println(indiaDateTime.withZoneSameInstant(ZoneId.of("UTC")));
@@ -33,5 +39,18 @@ public class DateTest {
         System.out.println(ZonedDateTime.of(zonedDateTime.toLocalDate(), zonedDateTime.toLocalTime(), localZoneId));
         System.out.println(zonedDateTime.toLocalTime());
 
+
+        ZonedDateTime zonedHour = ZonedDateTime.of(zonedDateTime.toLocalDate()
+                , LocalTime.parse("19" + ":51"
+                        , DateTimeFormatter.ISO_TIME)
+                , ZoneId.of("Asia/Calcutta"))
+                .withZoneSameInstant(localZoneId);
+        System.out.println("zonedHour " + zonedHour);
+
+        String llHr = StringUtils.leftPad(Integer.toString(1), 2, "0");
+        System.out.println(llHr);
+
+        System.out.println(localTime.atOffset(ZoneOffset.of("+05:30")).format(DateTimeFormatter.ISO_OFFSET_TIME));
+        System.out.println(ZonedDateTime.now().toLocalTime());
     }
 }
