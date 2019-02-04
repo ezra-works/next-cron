@@ -463,7 +463,7 @@ public class Controller {
         cronListView.getSelectionModel().selectFirst();
 
         timezoneComboBox.setItems(zoneLists);
-        timezoneComboBox.getSelectionModel().select("Australia/Sydney (UTC+11:00)");
+//        timezoneComboBox.getSelectionModel().select("Australia/Sydney (UTC+11:00)");
         event.consume();
     }
 
@@ -527,7 +527,7 @@ public class Controller {
                 ZonedDateTime cronZonedEndDate = cronEndDate.getValue().atStartOfDay(cronZoneId);
                 CronUtils.selectedCron.setEndDate(cronZonedEndDate.toString());
             }
-            else CronUtils.selectedCron.setEndDate("");
+            else CronUtils.selectedCron.setEndDate(null);
 
             if(cronStartTime.getValue() !=null)
                 CronUtils.selectedCron.setStartTime(cronStartTime.getValue()
@@ -538,7 +538,7 @@ public class Controller {
             if(cronEndTime.getValue() !=null)
                 CronUtils.selectedCron.setEndTime(cronEndTime.getValue()
                         .atOffset(cronZoneOffSet).format(DateTimeFormatter.ISO_OFFSET_TIME));
-            else CronUtils.selectedCron.setEndTime("");
+            else CronUtils.selectedCron.setEndTime(null);
 
 
             LOGGER.log(Level.FINEST,"onSave " + CronUtils.selectedCron);
@@ -866,6 +866,8 @@ public class Controller {
                                 ZonedDateTime.parse(CronUtils.selectedCron.getEndDate()) : null;
                         if(endDate != null)
                             cronEndDate.setValue(endDate.toLocalDate());
+                        else
+                            cronEndDate.setValue(null);
 
                         LocalTime startTime = (! CronUtils.selectedCron.getStartTime().isEmpty()) ?
                                 LocalTime.parse(CronUtils.selectedCron.getStartTime()
@@ -877,6 +879,8 @@ public class Controller {
                                         , DateTimeFormatter.ISO_OFFSET_TIME) : null;
                         if(endTime != null)
                             cronEndTime.setValue(endTime);
+                        else
+                            cronEndTime.setValue(null);
                     }
                 });
         cronListView.getSelectionModel().selectFirst();

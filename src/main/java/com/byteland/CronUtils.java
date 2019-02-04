@@ -156,6 +156,16 @@ public class CronUtils {
         return ZoneOffset.of(zoneOffset);
     }
 
+    Boolean isParamValid(Object object) {
+        boolean retVal = false;
+        if(object instanceof String)
+            if(object != null && ! object.toString().equalsIgnoreCase("")
+            && ! object.toString().isEmpty())
+                retVal = true;
+
+            return retVal;
+    }
+
     private void setupFolders() {
 
         Path path = Paths.get(CronConstants.DATA_PATH);
