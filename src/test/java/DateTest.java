@@ -1,4 +1,3 @@
-
 import org.apache.commons.lang.StringUtils;
 
 import java.time.*;
@@ -27,10 +26,14 @@ public class DateTest {
 
         System.out.println(indiaDateTime.withZoneSameInstant(ZoneId.of("UTC")));
 
-        System.out.println(ZonedDateTime.parse("2019-01-26T12:04:57.369+05:30[Asia/Calcutta]"));
-
         System.out.println(ZonedDateTime.parse("2019-01-26T12:04:57.369+05:30[Asia/Calcutta]")
                 .withZoneSameInstant(ZoneId.of("Australia/Sydney")));
+
+        System.out.println("----" + ZonedDateTime.parse("2019-02-01T00:00+11:00[Australia/Sydney]")
+                .withZoneSameInstant(ZoneId.of("Asia/Calcutta")));
+        System.out.println("2----" + ZonedDateTime.parse("2019-02-01T00:00+11:00[Australia/Sydney]"
+        , DateTimeFormatter.ISO_DATE)
+                .withZoneSameInstant(ZoneId.of("Asia/Calcutta")));
 
         System.out.println(localDate.atStartOfDay(ZoneId.of("Asia/Calcutta")));
 
