@@ -10,6 +10,8 @@ import javafx.scene.control.ComboBox;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.File;
 import java.io.IOException;
@@ -26,14 +28,12 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicReference;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class CronUtils {
 
-    private static final Logger LOGGER = Logger.getLogger(CronUtils.class.getName());
+    private static final Logger log = LogManager.getLogger(CronUtils.class);
     static Cron selectedCron;
 
     public CronUtils(Boolean bool) {
@@ -49,7 +49,7 @@ public class CronUtils {
                     .map(Path::toFile)
                     .collect(Collectors.toList());
         } catch (IOException e) {
-            LOGGER.log(Level.SEVERE, "No data files at " + CronConstants.DATA_PATH);
+            log.error( "No data files at " + CronConstants.DATA_PATH);
             return null;
         }
     }
@@ -81,14 +81,14 @@ public class CronUtils {
         });
 
         if(! isMatched.get()) {
-            LOGGER.log(Level.INFO, "No file found, so creating a new one");
+            log.info( "No file found, so creating a new one");
             String fileName = cron.getId() + ".json";
             File nFile = new File(CronConstants.DATA_PATH + "/" + fileName);
             try {
                 nFile.createNewFile();
                 wfile.set(nFile);
             } catch (IOException e) {
-                LOGGER.log(Level.SEVERE, "Error: cannot create new file");
+                log.error( "Error: cannot create new file");
             }
         }
 
@@ -98,7 +98,7 @@ public class CronUtils {
         try {
             FileUtils.writeStringToFile(wfile.get(), gson.toJson(defaultCron), Charset.defaultCharset());
         } catch (IOException e) {
-            LOGGER.log(Level.SEVERE, "Sorry cannot save the file to db");
+            log.error( "Sorry cannot save the file to db");
         }
     }
 
@@ -114,7 +114,7 @@ public class CronUtils {
     void tidyArgumentList(ComboBox<String> argumentComboBox) {
         argumentComboBox.getItems().removeIf(Objects::isNull);
         argumentComboBox.getItems().removeIf(s -> s.equalsIgnoreCase(CronConstants.ARGUEMENT_STG));
-        LOGGER.log(Level.FINEST, "tidyArgumentList: " + argumentComboBox.getItems());
+        log.debug( "tidyArgumentList: " + argumentComboBox.getItems());
 //        return argumentComboBox.getItems();
     }
 
@@ -140,7 +140,7 @@ public class CronUtils {
                 .sorted(String::compareTo)
                 .collect(Collectors.toList());
         final ObservableList<String> zoneIds = FXCollections.observableArrayList(zoneLists);
-        LOGGER.log(Level.INFO, "available ZoneIds: " + zoneIds);
+        log.info( "available ZoneIds: " + zoneIds);
         return zoneIds;
     }
 
@@ -173,10 +173,10 @@ public class CronUtils {
             try {
                 Files.createDirectories(path);
                 if(Files.exists(path)) {
-                    LOGGER.log(Level.INFO, "path created " + path);
+                    log.info( "path created " + path);
                 }
             } catch (IOException e) {
-                LOGGER.log(Level.SEVERE, "data folder cannot be created" + e.getMessage());
+                log.error( "data folder cannot be created" + e.getMessage());
             }
         }
         path = Paths.get(CronConstants.LOG_PATH);
@@ -184,10 +184,10 @@ public class CronUtils {
             try {
                 Files.createDirectories(path);
                 if(Files.exists(path)) {
-                    LOGGER.log(Level.INFO, "path created " + path);
+                    log.info( "path created " + path);
                 }
             } catch (IOException e) {
-                LOGGER.log(Level.SEVERE, "log folder cannot be created" + e.getMessage());
+                log.error( "log folder cannot be created" + e.getMessage());
             }
         }
     }

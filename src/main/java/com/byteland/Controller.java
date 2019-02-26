@@ -18,10 +18,11 @@ import javafx.scene.text.TextAlignment;
 import javafx.stage.FileChooser;
 import javafx.util.Duration;
 import org.apache.commons.lang.SystemUtils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.controlsfx.control.Notifications;
 
 import java.io.File;
-import java.io.IOException;
 import java.net.URL;
 import java.time.LocalTime;
 import java.time.ZoneId;
@@ -29,23 +30,10 @@ import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
-import java.util.logging.Level;
-import java.util.logging.LogManager;
-import java.util.logging.Logger;
 
 public class Controller {
 
-    private static final LogManager logManager = LogManager.getLogManager();
-    private static final Logger LOGGER = Logger.getLogger("confLogger");
-
-    static {
-        try {
-            logManager.readConfiguration(Main.class.getResourceAsStream("/conf/logger.properties"));
-            LOGGER.log(Level.INFO, "init called");
-        } catch (IOException exception) {
-            LOGGER.log(Level.SEVERE, "Error in loading configuration",exception);
-        }
-    }
+    private static final Logger log = LogManager.getLogger(Controller.class);
 
     @FXML // ResourceBundle that was given to the FXMLLoader
     private ResourceBundle resources;
@@ -443,7 +431,7 @@ public class Controller {
 
     @FXML
     void addCronButtonAction(ActionEvent event) {
-        LOGGER.log(Level.FINEST, "random " + random.ints(500, 5000)
+        log.debug( "random " + random.ints(500, 5000)
                 .limit(1).findFirst().getAsInt());
         Cron addCron = cronUtils.getDefaultCron().getCron();
         addCron.setName("NewCron"
@@ -455,7 +443,7 @@ public class Controller {
         if(lastIndex != -1)
             lastIndexCronId = cronLists.cronObservableList.get(lastIndex).getId();
 
-        LOGGER.log(Level.FINEST,"lastIndexCronId " + lastIndexCronId);
+        log.debug("lastIndexCronId " + lastIndexCronId);
 
         addCron.setId(lastIndexCronId + 1);
         cronLists.cronObservableList.add(0, addCron);
@@ -541,8 +529,8 @@ public class Controller {
             else CronUtils.selectedCron.setEndTime(null);
 
 
-            LOGGER.log(Level.FINEST,"onSave " + CronUtils.selectedCron);
-            LOGGER.log(Level.INFO,"saved " + CronUtils.selectedCron);
+            log.debug("onSave " + CronUtils.selectedCron);
+            log.info("saved " + CronUtils.selectedCron.getName());
             cronUtils.writeCronToDB(CronUtils.selectedCron);
 
             Notifications.create()
@@ -651,7 +639,7 @@ public class Controller {
                             jfxCheckBox.setSelected(true);
                     });
         } catch (Exception e) {
-            LOGGER.log(Level.FINEST, "ignoring second action event");
+            log.debug( "ignoring second action event");
         }
         event.consume();
     }
@@ -673,7 +661,7 @@ public class Controller {
                             jfxCheckBox.setSelected(true);
                     });
         } catch (Exception e) {
-            LOGGER.log(Level.FINEST,"ignoring second action event");
+            log.debug("ignoring second action event");
         }
         event.consume();
     }
@@ -722,7 +710,7 @@ public class Controller {
             argumentComboBox.setVisible(true);
 
         } catch (NullPointerException npe) {
-            LOGGER.log(Level.FINEST," ___NPE___");
+            log.debug(" ___NPE___");
         }
 
         event.consume();
@@ -743,7 +731,7 @@ public class Controller {
 
 
         } catch (NullPointerException npe) {
-            LOGGER.log(Level.FINEST,"___NPE___");
+            log.debug("___NPE___");
         }
         event.consume();
     }
@@ -806,7 +794,7 @@ public class Controller {
 
                         cStatus = new SimpleBooleanProperty(CronUtils.selectedCron.getStatus()
                                 .equalsIgnoreCase(CronConstants.CRON_ENABLED));
-                        LOGGER.log(Level.FINEST, "selected cron status:  " + cStatus);
+                        log.debug( "selected cron status:  " + cStatus);
 
                         if (cStatus.getValue())
                             cronStatusButton.setSelected(true);
@@ -844,7 +832,7 @@ public class Controller {
                             argumentComboBox.setItems(null);
                             scriptNameText.setText(null);
 
-                            LOGGER.log(Level.FINEST,"selected cron parameter: "
+                            log.debug("selected cron parameter: "
                                     + CronUtils.selectedCron.getParameter());
                             argumentComboBox.setItems(FXCollections.observableArrayList(
                                         CronUtils.selectedCron.getParameter()));

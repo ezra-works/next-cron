@@ -1,11 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="Added timezone capability">
+    <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="Fixed corner lagging">
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_logging_log4j_log4j_api_2_11_2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_logging_log4j_log4j_core_2_11_2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/log4j2.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dependency-reduced-pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/dependency-reduced-pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/next-cron.iml" beforeDir="false" afterPath="$PROJECT_DIR$/next-cron.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/byteland/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/byteland/Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/byteland/CronConstants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/byteland/CronConstants.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/byteland/CronExecute.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/byteland/CronExecute.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/DateTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/DateTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/byteland/CronListViewCell.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/byteland/CronListViewCell.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/byteland/CronLists.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/byteland/CronLists.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/byteland/CronUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/byteland/CronUtils.java" afterDir="false" />
     </list>
     <ignored path="JavaFxApplication.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -69,10 +78,11 @@
     <session id="-1151396315">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="54" />
+          <entry key="project.closed" value="59" />
           <entry key="project.open.time.0" value="5" />
           <entry key="project.open.time.1" value="2" />
-          <entry key="project.open.time.10" value="1" />
+          <entry key="project.open.time.10" value="2" />
+          <entry key="project.open.time.11" value="1" />
           <entry key="project.open.time.12" value="1" />
           <entry key="project.open.time.14" value="1" />
           <entry key="project.open.time.16" value="1" />
@@ -80,10 +90,10 @@
           <entry key="project.open.time.4" value="1" />
           <entry key="project.open.time.5" value="4" />
           <entry key="project.open.time.6" value="12" />
-          <entry key="project.open.time.7" value="14" />
-          <entry key="project.open.time.8" value="10" />
+          <entry key="project.open.time.7" value="15" />
+          <entry key="project.open.time.8" value="12" />
           <entry key="project.open.time.9" value="3" />
-          <entry key="project.opened" value="56" />
+          <entry key="project.opened" value="61" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -95,13 +105,14 @@
           <entry key="dson" value="1" />
           <entry key="fxml" value="8" />
           <entry key="gitignore" value="1" />
-          <entry key="java" value="118" />
+          <entry key="java" value="131" />
           <entry key="json" value="57" />
+          <entry key="log" value="2" />
           <entry key="lst" value="2" />
           <entry key="md" value="2" />
           <entry key="png" value="2" />
-          <entry key="properties" value="4" />
-          <entry key="xml" value="15" />
+          <entry key="properties" value="7" />
+          <entry key="xml" value="17" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
@@ -109,11 +120,11 @@
           <entry key="CLASS" value="11" />
           <entry key="CSS" value="4" />
           <entry key="Image" value="2" />
-          <entry key="JAVA" value="118" />
+          <entry key="JAVA" value="131" />
           <entry key="JSON" value="57" />
-          <entry key="PLAIN_TEXT" value="9" />
-          <entry key="Properties" value="4" />
-          <entry key="XML" value="23" />
+          <entry key="PLAIN_TEXT" value="11" />
+          <entry key="Properties" value="7" />
+          <entry key="XML" value="25" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
@@ -122,21 +133,21 @@
           <entry key="dummy" value="4" />
           <entry key="fxml" value="350" />
           <entry key="gitignore" value="24" />
-          <entry key="java" value="19636" />
+          <entry key="java" value="19684" />
           <entry key="json" value="527" />
-          <entry key="properties" value="86" />
-          <entry key="txt" value="207" />
-          <entry key="xml" value="340" />
+          <entry key="properties" value="104" />
+          <entry key="txt" value="244" />
+          <entry key="xml" value="471" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="CSS" value="325" />
-          <entry key="JAVA" value="19636" />
+          <entry key="JAVA" value="19684" />
           <entry key="JSON" value="527" />
-          <entry key="PLAIN_TEXT" value="235" />
-          <entry key="Properties" value="86" />
-          <entry key="XML" value="690" />
+          <entry key="PLAIN_TEXT" value="272" />
+          <entry key="Properties" value="104" />
+          <entry key="XML" value="821" />
         </counts>
       </usages-collector>
     </session>
@@ -149,8 +160,20 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/byteland/Controller.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="335">
-              <caret line="533" column="75" selection-start-line="533" selection-start-column="75" selection-end-line="533" selection-end-column="75" />
+            <state relative-caret-position="-331">
+              <caret line="835" column="73" selection-start-line="835" selection-start-column="61" selection-end-line="835" selection-end-column="73" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/byteland/CronExecute.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="4065">
+              <caret line="271" column="21" selection-start-line="271" selection-start-column="21" selection-end-line="271" selection-end-column="21" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -159,68 +182,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/byteland/CronExecute.java">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/log4j2.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-974">
-              <caret line="199" column="87" selection-start-line="199" selection-start-column="87" selection-end-line="199" selection-end-column="87" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/byteland/CronUtils.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="418">
-              <caret line="158" column="24" selection-start-line="158" selection-start-column="12" selection-end-line="158" selection-end-column="24" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/resources/conf/logger.properties">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="135">
-              <caret line="9" column="21" selection-start-line="9" selection-start-column="21" selection-end-line="9" selection-end-column="21" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/test/java/DateTest.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="208">
-              <caret line="33" column="29" selection-start-line="33" selection-start-column="29" selection-end-line="33" selection-end-column="29" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/target/java-gen/com/byteland/model/Cron.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4590">
-              <caret line="344" column="24" selection-start-line="344" selection-start-column="24" selection-end-line="344" selection-end-column="24" />
-              <folding>
-                <element signature="e#5297#5298#0" expanded="true" />
-                <element signature="e#5329#5330#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_192.jdk/Contents/Home/src.zip!/java/lang/ProcessBuilder.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3315">
-              <caret line="251" column="26" selection-start-line="251" selection-start-column="26" selection-end-line="251" selection-end-column="26" />
+            <state relative-caret-position="405">
+              <caret line="27" column="19" lean-forward="true" selection-start-line="25" selection-start-column="12" selection-end-line="27" selection-end-column="19" />
             </state>
           </provider>
         </entry>
@@ -236,12 +201,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>rootPane</find>
-      <find>weekSunCheckBox</find>
-      <find>argumentComboBox</find>
-      <find>Enter A</find>
-      <find>cronStatusButton</find>
-      <find>JFXDatePicker</find>
       <find>argumentDeleteButton</find>
       <find>UTC</find>
       <find>cronTextFieldAction</find>
@@ -266,6 +225,12 @@
       <find>cron.getParameter().add</find>
       <find>builder.command(cron.getParameter());</find>
       <find>getMonthValue</find>
+      <find>.log(Level.FINEST,</find>
+      <find>log.log(Level.FINEST,</find>
+      <find>LOGGER</find>
+      <find>log.log(Level.INFO,</find>
+      <find>.trace</find>
+      <find>fileLogger</find>
     </findStrings>
     <replaceStrings>
       <replace>accessibleText=&quot;week&quot;</replace>
@@ -281,6 +246,12 @@
       <replace>zonedLocalDateTime</replace>
       <replace>cParam.add</replace>
       <replace>builder.command(cParam);</replace>
+      <replace>.trace(</replace>
+      <replace>log.debug(</replace>
+      <replace>log</replace>
+      <replace>log.info(</replace>
+      <replace>.debug</replace>
+      <replace>RollingFile</replace>
     </replaceStrings>
   </component>
   <component name="FindManager">
@@ -318,21 +289,24 @@
         <option value="$PROJECT_DIR$/db/2.json" />
         <option value="$PROJECT_DIR$/src/main/resources/style/style.css" />
         <option value="$PROJECT_DIR$/data/2.json" />
-        <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/data/1.json" />
-        <option value="$PROJECT_DIR$/src/main/java/com/byteland/CronListViewCell.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/byteland/CronConstants.java" />
         <option value="$PROJECT_DIR$/gitignore" />
         <option value="$PROJECT_DIR$/src/main/java/com/byteland/Main.java" />
         <option value="$PROJECT_DIR$/src/main/resources/cron.fxml" />
-        <option value="$PROJECT_DIR$/src/main/java/com/byteland/CronLists.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/byteland/GridUtils.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/byteland/CronUtils.java" />
         <option value="$PROJECT_DIR$/data/0.json" />
-        <option value="$PROJECT_DIR$/src/main/java/com/byteland/Controller.java" />
         <option value="$PROJECT_DIR$/src/test/java/DateTest.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/byteland/CronExecute.java" />
         <option value="$PROJECT_DIR$/src/main/resources/conf/logger.properties" />
+        <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/src/main/resources/conf/log4j2.properties" />
+        <option value="$PROJECT_DIR$/src/main/java/com/byteland/CronUtils.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/byteland/CronListViewCell.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/byteland/CronLists.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/log4j2.properties" />
+        <option value="$PROJECT_DIR$/src/main/java/com/byteland/CronConstants.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/byteland/Controller.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/byteland/CronExecute.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/log4j2.xml" />
       </list>
     </option>
   </component>
@@ -372,10 +346,13 @@
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
+      <flattenPackages ProjectPane="false" />
+      <abbreviatePackageNames ProjectPane="true" />
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
       <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -386,11 +363,6 @@
             <path>
               <item name="next-cron" type="b2602c69:ProjectViewProjectNode" />
               <item name="next-cron" type="462c0819:PsiDirectoryNode" />
-              <item name="data" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="next-cron" type="b2602c69:ProjectViewProjectNode" />
-              <item name="next-cron" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -411,36 +383,15 @@
               <item name="next-cron" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="next-cron" type="b2602c69:ProjectViewProjectNode" />
-              <item name="next-cron" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="conf" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="next-cron" type="b2602c69:ProjectViewProjectNode" />
-              <item name="next-cron" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="json" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="next-cron" type="b2602c69:ProjectViewProjectNode" />
-              <item name="next-cron" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="next-cron" type="b2602c69:ProjectViewProjectNode" />
-              <item name="next-cron" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="byteland" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="next-cron" type="b2602c69:ProjectViewProjectNode" />
+              <item name="next-cron" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="next-cron" type="b2602c69:ProjectViewProjectNode" />
@@ -451,7 +402,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -469,13 +419,11 @@
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="recentsLimit" value="5" />
-    <property name="settings.editor.selected.configurable" value="reference.settings.project.maven.importing" />
+    <property name="settings.editor.selected.configurable" value="editor.preferences.import" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/src/main/resources/style" />
-      <recent name="$PROJECT_DIR$/src/main/resources/images" />
-      <recent name="$PROJECT_DIR$/src/main/java/nextcron" />
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="com.byteland" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/main/resources/model" />
@@ -483,8 +431,11 @@
       <recent name="$PROJECT_DIR$/src/main/java/nextcron" />
       <recent name="$PROJECT_DIR$/src/main/resources" />
     </key>
-    <key name="CreateClassDialog.RecentsKey">
-      <recent name="com.byteland" />
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/resources" />
+      <recent name="$PROJECT_DIR$/src/main/resources/style" />
+      <recent name="$PROJECT_DIR$/src/main/resources/images" />
+      <recent name="$PROJECT_DIR$/src/main/java/nextcron" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -499,7 +450,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.DateTest">
+  <component name="RunManager" selected="Application.CronExecute">
     <configuration default="true" type="DartUnitRunConfigurationType" factoryName="DartUnit">
       <option name="VMOptions" />
       <option name="arguments" />
@@ -603,8 +554,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.DateTest" />
         <item itemvalue="Application.CronExecute" />
+        <item itemvalue="Application.DateTest" />
       </list>
     </recent_temporary>
   </component>
@@ -652,7 +603,14 @@
       <option name="project" value="LOCAL" />
       <updated>1549277719038</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Fixed corner lagging">
+      <created>1549368752268</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1549368752268</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -660,14 +618,15 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="812" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.6703755" visible="true" weight="0.17310444" />
-      <window_info id="Structure" order="1" weight="0.25" />
-      <window_info id="Favorites" order="2" />
+      <window_info content_ui="combo" x="597" y="181" width="245" height="495" id="Project" order="0" sideWeight="0.6703755" visible="true" weight="0.18311875" />
+      <window_info id="Structure" order="1" weight="0.24964234" />
+      <window_info id="Favorites" order="2" weight="0.3297568" />
       <window_info id="Designer" order="3" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32916668" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.3125" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.3125" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -679,7 +638,7 @@
       <window_info anchor="bottom" id="Profiler" order="11" />
       <window_info anchor="bottom" id="Event Log" order="12" weight="0.32916668" />
       <window_info anchor="bottom" id="Messages" order="13" weight="0.3236111" />
-      <window_info anchor="bottom" id="Terminal" order="14" weight="0.40555555" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="14" visible="true" weight="0.40555555" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -705,41 +664,14 @@
     <MESSAGE value="NC-1, NC-2 will honor stop time, shell scripts selectable" />
     <MESSAGE value="Added timezone capability" />
     <MESSAGE value="Fixed default timezone" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed default timezone" />
+    <MESSAGE value="Fixed corner lagging" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed corner lagging" />
   </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/test/java/CronTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="15" column="91" selection-start-line="15" selection-start-column="91" selection-end-line="15" selection-end-column="91" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/target/java-gen/com/byteland/model/Minutes.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-235">
-          <caret line="29" column="44" lean-forward="true" selection-start-line="29" selection-start-column="44" selection-end-line="29" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/target/java-gen/com/byteland/model/Weekdays.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="57">
-          <caret line="28" column="2" selection-start-line="28" selection-start-column="2" selection-end-line="28" selection-end-column="2" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_192.jdk/Contents/Home/javafx-src.zip!/javafx/scene/control/SelectionModel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="143">
-          <caret line="119" column="19" selection-start-line="119" selection-start-column="19" selection-end-line="119" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/target/java-gen/com/byteland/model/DefaultCron.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="135">
@@ -796,12 +728,12 @@
     <entry file="file://$PROJECT_DIR$/db/1.json" />
     <entry file="file://$PROJECT_DIR$/db/2.json" />
     <entry file="file://$PROJECT_DIR$/src/main/resources/cronListCell.fxml">
+      <provider editor-type-id="JavaFX-Scene-Builder" />
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="345">
           <caret line="23" column="125" selection-start-line="23" selection-start-column="125" selection-end-line="23" selection-end-column="125" />
         </state>
       </provider>
-      <provider editor-type-id="JavaFX-Scene-Builder" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/style/style.css">
       <provider selected="true" editor-type-id="text-editor">
@@ -814,10 +746,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="15">
           <caret line="388" column="22" selection-start-line="388" selection-start-column="22" selection-end-line="388" selection-end-column="22" />
-          <folding>
-            <element signature="e#17232#17233#0" expanded="true" />
-            <element signature="e#17274#17275#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -842,21 +770,7 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/data/1.djson" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/byteland/CronConstants.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="10" column="42" selection-start-line="10" selection-start-column="42" selection-end-line="10" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/data/2.dson" />
-    <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="16" column="38" selection-start-line="16" selection-start-column="38" selection-end-line="16" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/data/1.json" />
     <entry file="file://$PROJECT_DIR$/gitignore">
       <provider selected="true" editor-type-id="text-editor">
@@ -865,32 +779,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/log/cron.log.0">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
+    <entry file="file://$PROJECT_DIR$/log/cron.log.0" />
     <entry file="file://$PROJECT_DIR$/log/cron.log.0.1" />
     <entry file="file://$PROJECT_DIR$/src/main/resources/cron.fxml">
+      <provider editor-type-id="JavaFX-Scene-Builder" />
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="133">
           <caret line="172" column="119" selection-start-line="172" selection-start-column="119" selection-end-line="172" selection-end-column="119" />
-        </state>
-      </provider>
-      <provider editor-type-id="JavaFX-Scene-Builder" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/byteland/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="24" column="5" selection-start-line="24" selection-start-column="5" selection-end-line="24" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/byteland/CronListViewCell.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="885">
-          <caret line="59" column="92" selection-start-line="59" selection-start-column="92" selection-end-line="59" selection-end-column="92" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -898,17 +793,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="151">
           <caret line="288" column="30" selection-start-line="288" selection-start-column="30" selection-end-line="288" selection-end-column="30" />
-          <folding>
-            <element signature="e#11812#11813#0" expanded="true" />
-            <element signature="e#11874#11875#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/byteland/GridUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-47">
-          <caret line="34" column="49" selection-start-line="34" selection-start-column="49" selection-end-line="34" selection-end-column="49" />
         </state>
       </provider>
     </entry>
@@ -926,24 +810,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/byteland/CronLists.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="21" column="37" selection-start-line="21" selection-start-column="37" selection-end-line="21" selection-end-column="37" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_192.jdk/Contents/Home/src.zip!/java/lang/String.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="129">
           <caret line="633" column="19" selection-start-line="633" selection-start-column="19" selection-end-line="633" selection-end-column="19" />
-          <folding>
-            <element signature="e#23072#23073#0" expanded="true" />
-            <element signature="e#23112#23113#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -954,48 +824,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/target/java-gen/com/byteland/model/Cron.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4590">
-          <caret line="344" column="24" selection-start-line="344" selection-start-column="24" selection-end-line="344" selection-end-column="24" />
-          <folding>
-            <element signature="e#5297#5298#0" expanded="true" />
-            <element signature="e#5329#5330#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_192.jdk/Contents/Home/src.zip!/java/lang/ProcessBuilder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3315">
-          <caret line="251" column="26" selection-start-line="251" selection-start-column="26" selection-end-line="251" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/data/0.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1275">
           <caret line="85" column="18" selection-start-line="85" selection-start-column="18" selection-end-line="85" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/byteland/CronUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="418">
-          <caret line="158" column="24" selection-start-line="158" selection-start-column="12" selection-end-line="158" selection-end-column="24" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/byteland/Controller.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="335">
-          <caret line="533" column="75" selection-start-line="533" selection-start-column="75" selection-end-line="533" selection-end-column="75" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1006,13 +838,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/DateTest.java">
+    <entry file="file://$PROJECT_DIR$/target/hs_err_pid1830.log" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/byteland/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="208">
-          <caret line="33" column="29" selection-start-line="33" selection-start-column="29" selection-end-line="33" selection-end-column="29" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="283">
+          <caret line="24" column="5" selection-start-line="24" selection-start-column="5" selection-end-line="24" selection-end-column="5" />
         </state>
       </provider>
     </entry>
@@ -1023,13 +853,116 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/byteland/CronExecute.java">
+    <entry file="file://$PROJECT_DIR$/src/test/java/DateTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-974">
-          <caret line="199" column="87" selection-start-line="199" selection-start-column="87" selection-end-line="199" selection-end-column="87" />
+        <state relative-caret-position="450">
+          <caret line="33" column="29" selection-start-line="33" selection-start-column="29" selection-end-line="33" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_192.jdk/Contents/Home/src.zip!/java/lang/ProcessBuilder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3315">
+          <caret line="251" column="26" selection-start-line="251" selection-start-column="26" selection-end-line="251" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="629">
+          <caret line="51" column="52" selection-start-line="51" selection-start-column="52" selection-end-line="51" selection-end-column="52" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/byteland/GridUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="7" lean-forward="true" selection-start-line="7" selection-end-line="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/log/cron.log">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/log4k2.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="480">
+          <caret line="32" column="22" selection-start-line="32" selection-start-column="22" selection-end-line="32" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/byteland/CronListViewCell.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="418">
+          <caret line="59" column="41" selection-start-line="59" selection-start-column="41" selection-end-line="59" selection-end-column="41" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/byteland/CronLists.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="11">
+          <caret line="21" column="62" selection-start-line="21" selection-start-column="47" selection-end-line="21" selection-end-column="62" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/byteland/CronUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="144">
+          <caret line="113" column="9" selection-start-line="113" selection-start-column="9" selection-end-line="113" selection-end-column="9" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/target/java-gen/com/byteland/model/Cron.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="426">
+          <caret line="344" column="24" selection-start-line="344" selection-start-column="24" selection-end-line="344" selection-end-column="24" />
+          <folding>
+            <element signature="e#5297#5298#0" expanded="true" />
+            <element signature="e#5329#5330#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/byteland/CronConstants.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="9" column="43" selection-start-line="9" selection-start-column="43" selection-end-line="9" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/byteland/Controller.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-331">
+          <caret line="835" column="73" selection-start-line="835" selection-start-column="61" selection-end-line="835" selection-end-column="73" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/byteland/CronExecute.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4065">
+          <caret line="271" column="21" selection-start-line="271" selection-start-column="21" selection-end-line="271" selection-end-column="21" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/log4j2.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="405">
+          <caret line="27" column="19" lean-forward="true" selection-start-line="25" selection-start-column="12" selection-end-line="27" selection-end-column="19" />
         </state>
       </provider>
     </entry>

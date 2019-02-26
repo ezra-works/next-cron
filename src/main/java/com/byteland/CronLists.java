@@ -6,17 +6,17 @@ import com.google.gson.Gson;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import org.apache.commons.io.IOUtils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class CronLists {
 
-    private static final Logger LOGGER = Logger.getLogger(CronLists.class.getName());
+    private static final Logger log = LogManager.getLogger(CronLists.class.getName());
     ObservableList<Cron> cronObservableList = FXCollections.observableArrayList();
 
     public CronLists() { setCronList(CronUtils.getCronFileList()); }
@@ -42,8 +42,8 @@ public class CronLists {
         if(files.size() == 0)
             cronObservableList.add(0, getDefaultCron());
 
-        LOGGER.log(Level.FINEST,"cronObservableList: " + cronObservableList.sorted());
-        LOGGER.log(Level.INFO, "Total crons: " + cronObservableList.size());
+        log.debug("cronObservableList: " + cronObservableList.sorted());
+        log.info( "Total crons: " + cronObservableList.size());
     }
 
     private Cron getDefaultCron() {
