@@ -6,7 +6,7 @@
 
     <groupId>com.byteland</groupId>
     <artifactId>next-cron</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.1</version>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -42,11 +42,6 @@
             <systemPath>${java.home}/lib/ext/jfxrt.jar</systemPath>
             <scope>system</scope>
         </dependency>
-        <!--<dependency>-->
-        <!--<groupId>org.apache.logging.log4j</groupId>-->
-        <!--<artifactId>log4j-api</artifactId>-->
-        <!--<version>${log4j-api.version}</version>-->
-        <!--</dependency>-->
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-core</artifactId>
@@ -96,55 +91,6 @@
                     </execution>
                 </executions>
             </plugin>
-            <!--<plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-shade-plugin</artifactId>
-                <version>3.2.1</version>
-                <executions>
-                    <execution>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>shade</goal>
-                        </goals>
-                        <configuration>
-                            <minimizeJar>true</minimizeJar>
-                            <transformers>
-                                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                    <manifestEntries>
-                                        <Main-Class>${app.main.class}</Main-Class>
-                                        <X-Compile-Source-JDK>${maven.compiler.source}</X-Compile-Source-JDK>
-                                        <X-Compile-Target-JDK>${maven.compiler.target}</X-Compile-Target-JDK>
-                                    </manifestEntries>
-                                </transformer>
-                            </transformers>
-                            <artifactSet>
-                                <excludes>
-                                    <exclude>junit:junit</exclude>
-                                    <exclude>jmock:*</exclude>
-                                    <exclude>org.apache.logging.log4j:log4j-api</exclude>
-                                    <exclude>org.apache.logging.log4j:log4j-core</exclude>
-                                </excludes>
-                            </artifactSet>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>-->
-            <!--<plugin>
-                <groupId>com.jolira</groupId>
-                <artifactId>onejar-maven-plugin</artifactId>
-                <version>1.4.4</version>
-                <executions>
-                    <execution>
-                        <configuration>
-                            <mainClass>${app.main.class}</mainClass>
-                            <attachToBuild>true</attachToBuild>
-                        </configuration>
-                        <goals>
-                            <goal>one-jar</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>-->
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
