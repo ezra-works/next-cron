@@ -1,3 +1,3 @@
 #!/bin/bash
 
-java -classpath ./next-cron.jar:. com.byteland.CronExecute
+java -cp "./next-cron-spring-boot.jar" -Dloader.main=com.byteland.CronExecute org.springframework.boot.loader.PropertiesLauncher

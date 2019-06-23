@@ -13,11 +13,13 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("/cron.fxml"));
         primaryStage.setTitle("Next Cron");
-        primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("/images/icon4.png")));
+//        primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("/images/icon4.png")));
+        primaryStage.getIcons().add(new Image("/images/icon4.png"));
 
         Scene scene  = new Scene(root, 800, 600);
 
-        scene.getStylesheets().addAll(getClass().getResource("/style/style.css").toExternalForm());
+        scene.getStylesheets().add(getClass().getResource("/style/style.css").toString());
+//        scene.setUserAgentStylesheet("style.css");
         primaryStage.setScene(scene);
 
         primaryStage.setResizable(false);
