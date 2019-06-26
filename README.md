@@ -6,6 +6,9 @@ Simple javafx application for configuring crons and executing that runs as an ex
 
 The application can be run in 2 modes
 1. GUI for configuring the crons
+
+[create-cron] (create-cron-1.gif) 
+
 2. batch mode for executing the crons.
 
 This javafx gui application provides simple way to setup a cron to run minute wise, hour wise, month, date with start and stop features.
