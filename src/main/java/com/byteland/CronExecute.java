@@ -123,7 +123,10 @@ public class CronExecute {
                             .withZoneSameInstant(localZoneId);
                     log.debug( cron.getName()
                             + " start getMonthValue : " + cronZonedDateTime.getMonthValue());
-                    return cronZonedDateTime.getMonthValue() <= zonedLocalDateTime.getMonthValue();
+                    if (cronZonedDateTime.getYear() < zonedLocalDateTime.getYear())
+                        return true;
+                    else
+                        return cronZonedDateTime.getMonthValue() <= zonedLocalDateTime.getMonthValue();
                 })
                 .filter(cron -> {
                     ZonedDateTime cronZonedDateTime = ZonedDateTime.parse(cron.getStartDate())
@@ -131,6 +134,9 @@ public class CronExecute {
                     log.debug( cron.getName()
                             + " start getDayOfMonth : " + cronZonedDateTime.getDayOfMonth()
                             + " server's getDayOfMonth() : " + zonedLocalDateTime.getDayOfMonth());
+
+                    if (cronZonedDateTime.getYear() < zonedLocalDateTime.getYear())
+                        return true;
 
                     if( cronZonedDateTime.getMonthValue() < zonedLocalDateTime.getMonthValue()) {
                         log.debug( cron.getName()
